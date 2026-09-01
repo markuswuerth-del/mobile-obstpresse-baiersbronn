@@ -150,6 +150,20 @@ Weiter
 
 <div id="personStatus"></div>
 
+<div
+  id="successMessage"
+  style="
+    display:none;
+    background:#d4edda;
+    color:#155724;
+    padding:15px;
+    border-radius:8px;
+    margin-top:15px;
+    text-align:center;
+    font-weight:bold;
+  ">
+</div>
+
 <div id="shiftContainer" style="display:none;"></div>
 
 <div id="saveContainer" style="display:none;">
@@ -442,9 +456,46 @@ const result =
 if(result.success){
 
     document
-      .getElementById("personStatus")
+      .getElementById("successMessage")
       .innerHTML =
-      "✅ Daten erfolgreich gespeichert";
+      "🍎 Vielen Dank für deine Unterstützung bei der Mobilen Obstpresse Baiersbronn.\n\nDeine Verfügbarkeit wurde erfolgreich gespeichert.\n\nWir wünschen dir bereits jetzt frohes Mosten! 🚜";;
+
+    document
+      .getElementById("successMessage")
+      .style.display = "block";
+
+    document
+      .getElementById("successMessage")
+      .scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+      });
+
+    setTimeout(() => {
+
+        document
+          .getElementById("successMessage")
+          .style.display = "none";
+
+    }, 8000);
+
+    document
+      .getElementById("firstName")
+      .value = "";
+
+    document
+      .getElementById("lastName")
+      .value = "";
+
+    document
+      .getElementById("shiftContainer")
+      .style.display = "none";
+
+    document
+      .getElementById("saveContainer")
+      .style.display = "none";
+
+    loadOverview();
 
 } else {
 
