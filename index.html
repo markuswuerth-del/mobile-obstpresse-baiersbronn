@@ -140,10 +140,6 @@ Weiter
 <div id="shiftContainer" style="display:none;"></div>
 
 <div id="saveContainer" style="display:none;">
-    <button onclick="saveData()">
-        Speichern
-    </button>
-</div>
 
 <button onclick="saveData()">
 Speichern
@@ -151,11 +147,69 @@ Speichern
 
 </div>
 
+</div>
+
 <div class="card">
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+">
 
 <h2>Wer kann wann?</h2>
 
+<button onclick="showAdminLogin()">
+🔒 Admin
+</button>
+
+</div>
+
+<div id="adminLogin"
+style="
+display:none;
+background:#fff3cd;
+padding:15px;
+border-radius:8px;
+margin-bottom:15px;
+">
+
+<h3>Admin Anmeldung</h3>
+
+<input
+type="password"
+id="adminPassword"
+placeholder="Passwort">
+
+<button onclick="loginAdmin()">
+Anmelden
+</button>
+
+</div>
+
+<div
+id="adminPanel"
+style="display:none;"
+>
+
+<h2>🔒 Adminbereich</h2>
+
+<button onclick="exportAllCSV()">
+📥 Gesamtexport CSV
+</button>
+
+<br><br>
+
+<div id="weekendExports"></div>
+
+</div>
+
 <div id="overview">
+Lade Daten...
+</div>
+
+<div id="overview">
+
 <hr>
 
 <h2>Eingetragene Helfer</h2>
@@ -316,6 +370,30 @@ async function saveData(){
     );
 
     loadOverview();
+
+}
+async function exportAllCSV(){
+
+    const response =
+      await fetch(SCRIPT_URL);
+
+    const data =
+      await response.json();
+
+    let csv =
+      "Vorname;Nachname;Schicht;Status\n";
+
+    data.forEach(row => {
+
+        csv +=
+          `${row.firstName};${row.lastName};${row.shift};${row.status}\n`;
+
+    });
+
+    downloadCSV(
+      csv,
+      "Obstpresse-Gesamt.csv"
+    );
 
 }
 
@@ -551,71 +629,6 @@ async function loadOverview(){
     }
 
 }
-async function loadOverview(){
-
-    const response =
-        await fetch(SCRIPT_URL);
-
-    const data =
-        await response.json();
-
-    const overview =
-        document.getElementById("overview");
-
-    overview.innerHTML = "";
-
-    shifts.forEach((shift)=>{
-
-        const yes =
-            data.filter(
-                d =>
-                d.shift === shift.label &&
-                d.status === "Ja"
-            );
-
-        const maybe =
-            data.filter(
-                d =>
-                d.shift === shift.label &&
-                d.status === "Vielleicht"
-            );
-
-        const no =
-            data.filter(
-                d =>
-                d.shift === shift.label &&
-                d.status === "Nein"
-            );
-
-        overview.innerHTML += `
-            <div class="shift">
-
-                <h3>${shift.label}</h3>
-
-                <p><strong>🟢 Ja (${yes.length})</strong></p>
-                ${yes.map(
-                    p =>
-                    `${p.firstName} ${p.lastName}<br>`
-                ).join("")}
-
-                <p><strong>🟡 Vielleicht (${maybe.length})</strong></p>
-                ${maybe.map(
-                    p =>
-                    `${p.firstName} ${p.lastName}<br>`
-                ).join("")}
-
-                <p><strong>🔴 Nein (${no.length})</strong></p>
-                ${no.map(
-                    p =>
-                    `${p.firstName} ${p.lastName}<br>`
-                ).join("")}
-
-            </div>
-        `;
-
-    });
-
-}
 async function loadExistingData(){
 
     const firstName =
@@ -672,18 +685,135 @@ async function loadExistingData(){
     );
 
 }
-``
+function showAdminLogin(){
+
+    document
+      .getElementById("adminLogin")
+      .style.display="block";
+
+}
+function loginAdmin(){
+
+    const password =
+      document
+      .getElementById("adminPassword")
+      .value;
+
+    if(password !== "BB26"){
+
+        alert("Falsches Passwort");
+        return;
+
+    }
+
+    document
+      .getElementById("adminPanel")
+      .style.display="block";
+
+    createWeekendButtons();
+
+}
+function downloadCSV(content,fileName){
+
+    const blob =
+      new Blob(
+        [content],
+        {
+          type:"text/csv;charset=utf-8;"
+        }
+      );
+
+    const link =
+      document.createElement("a");
+
+    link.href =
+      URL.createObjectURL(blob);
+
+    link.download =
+      fileName;
+
+    link.click();
+
+}
+function createWeekendButtons(){
+
+    const container =
+      document.getElementById(
+        "weekendExports"
+      );
+
+    container.innerHTML="";
+
+    shifts.forEach(shift=>{
+
+        const btn =
+          document.createElement("button");
+
+        btn.innerText =
+          "📥 " + shift.label;
+
+        btn.style.marginBottom =
+          "5px";
+
+        btn.onclick =
+          () => exportWeekend(
+              shift.label
+            );
+
+        container.appendChild(btn);
+
+        container.appendChild(
+          document.createElement("br")
+        );
+
+    });
+
+}
+async function exportWeekend(shiftName){
+
+    const response =
+      await fetch(SCRIPT_URL);
+
+    const data =
+      await response.json();
+
+    const filtered =
+      data.filter(
+        d =>
+          d.shift === shiftName
+      );
+
+    let csv =
+      "Vorname;Nachname;Status\n";
+
+    filtered.forEach(row=>{
+
+        csv +=
+          `${row.firstName};${row.lastName};${row.status}\n`;
+
+    });
+
+    downloadCSV(
+      csv,
+      shiftName.replaceAll(" ","_") +
+      ".csv"
+    );
+
+}
+
 createShifts();
 
 document
   .getElementById("shiftContainer")
   .style.display = "none";
+  
+  document
+    .getElementById("saveContainer")
+    .style.display = "none";
 
 loadOverview();
 loadParticipantList();
-``
 
-</script>
 document
   .getElementById("firstName")
   .addEventListener("blur", loadExistingData);
@@ -691,6 +821,9 @@ document
 document
   .getElementById("lastName")
   .addEventListener("blur", loadExistingData);
+
+</script>
+
 
 </body>
 </html>
