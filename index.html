@@ -101,31 +101,26 @@ h1,h2,h3{
 
 <div class="card">
 
-<h1>🍎 Mobile Obstpresse Baiersbronn</h1>
+<div style="text-align:center;">
+<h1> - Terminplanung 2026 - </h1>
+<h1> 🍎 Mobile Obstpresse Baiersbronn 🍎</h1>
 <div style="text-align:center;">
 
 <img
 src="logo-baiersbronn.png"
 alt="Gemeinde Baiersbronn"
 style="
-max-width:180px;
+max-width:100px;
 margin-bottom
-
-<p>
-Vielen Dank für eure Unterstützung bei der Mobilen Obstpresse Baiersbronn.
-</p>
-
-<p>
-Die angegebenen Uhrzeiten dienen lediglich als grobe
-Verfügbarkeitsabfrage. Die tatsächlichen Einsatzzeiten richten sich nach
-den gebuchten Press-Terminen und können davon abweichen.
-</p>
 
 </div>
 
 <div class="card">
 
-<h2>Persönliche Daten</h2>
+<h2>Bitte Name und Vorname eintragen:</h2>
+<h5>Die angegebenen Uhrzeiten dienen lediglich als grobe
+Verfügbarkeitsabfrage. Die tatsächlichen Einsatzzeiten richten sich nach
+den gebuchten Press-Terminen und können davon abweichen.</h5>
 
 <input id="firstName" placeholder="Vorname">
 
@@ -687,9 +682,29 @@ async function loadExistingData(){
 }
 function showAdminLogin(){
 
-    document
-      .getElementById("adminLogin")
-      .style.display="block";
+    const adminPanel =
+      document.getElementById("adminPanel");
+
+    const adminLogin =
+      document.getElementById("adminLogin");
+
+    // Bereits eingeloggt?
+    if(adminPanel.style.display === "block"){
+
+        adminPanel.style.display = "none";
+        adminLogin.style.display = "none";
+
+        document.getElementById(
+          "adminPassword"
+        ).value = "";
+
+        alert("Admin abgemeldet");
+
+        return;
+    }
+
+    // Login-Fenster anzeigen
+    adminLogin.style.display = "block";
 
 }
 function loginAdmin(){
@@ -707,8 +722,12 @@ function loginAdmin(){
     }
 
     document
+      .getElementById("adminLogin")
+      .style.display = "none";
+
+    document
       .getElementById("adminPanel")
-      .style.display="block";
+      .style.display = "block";
 
     createWeekendButtons();
 
