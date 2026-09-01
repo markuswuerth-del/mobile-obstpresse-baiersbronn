@@ -92,6 +92,24 @@ button{
 h1,h2,h3{
     margin-top:0;
 }
+
+details{
+    margin-top:10px;
+    margin-bottom:15px;
+}
+
+summary{
+    cursor:pointer;
+    font-weight:bold;
+    padding:10px;
+    background:#f5f5f5;
+    border-radius:8px;
+}
+
+summary:hover{
+    background:#eeeeee;
+}
+
 </style>
 </head>
 
@@ -187,15 +205,38 @@ id="adminPanel"
 style="display:none;"
 >
 
-<h2>🔒 Adminbereich</h2>
+<details>
+    <summary>📥 Exporte</summary>
 
-<button onclick="exportAllCSV()">
-📥 Gesamtexport CSV
-</button>
+    <br>
 
-<br><br>
+    <button onclick="exportAllCSV()">
+        Gesamtexport
+    </button>
 
-<div id="weekendExports"></div>
+    <div id="weekendExports"></div>
+
+</details>
+
+<details>
+    <summary>👥 Helferübersicht</summary>
+
+    <div id="helperOverview"></div>
+	
+	<hr>
+
+<h3>👤 Eingetragene Helfer</h3>
+
+<div id="participantsList"></div>
+
+</details>
+
+<details>
+    <summary>📋 Verfügbarkeiten je Schicht</summary>
+
+    <div id="adminOverview"></div>
+
+</details>
 
 <hr>
 
@@ -215,10 +256,6 @@ Lade Daten...
 
 <hr>
 
-<h2>Eingetragene Helfer</h2>
-
-<div id="participantsList"></div>
-Lade Daten...
 </div>
 
 </div>
@@ -338,38 +375,86 @@ async function saveData(){
 
         return;
     }
+	const missingShifts = [];
 
-    const entries = [];
+	for(const shift of shifts){
 
-    for(const shift of shifts){
+    const selected =
+        document.querySelector(
+            `input[name="${shift.id}"]:checked`
+        );
 
-        const selected =
-            document.querySelector(
-                `input[name="${shift.id}"]:checked`
-            );
+    if(!selected){
 
-        entries.push({
-            shift: shift.label,
-            status: selected.value
-        });
+        missingShifts.push(shift.label);
 
     }
 
-    await fetch(
-      SCRIPT_URL,
-      {
-        method:"POST",
-        body:JSON.stringify({
-          firstName,
-          lastName,
-          entries
-        })
-      }
-    );
+}
+if(missingShifts.length > 0){
 
-    alert(
-      "Daten erfolgreich gespeichert."
-    );
+    const proceed =
+        confirm(
+            `Es wurden ${missingShifts.length} Termine noch nicht beantwortet.\n\nTrotzdem speichern?`
+        );
+
+    if(!proceed){
+        return;
+    }
+
+}
+   const entries = [];
+
+for(const shift of shifts){
+
+    const selected =
+        document.querySelector(
+            `input[name="${shift.id}"]:checked`
+        );
+
+    if(!selected){
+        continue;
+    }
+
+    entries.push({
+        shift: shift.label,
+        status: selected.value
+    });
+
+}
+
+const response =
+  await fetch(
+    SCRIPT_URL,
+    {
+      method:"POST",
+      body:JSON.stringify({
+        firstName,
+        lastName,
+        entries
+      })
+    }
+  );
+
+const result =
+  await response.json();
+
+if(result.success){
+
+    document
+      .getElementById("personStatus")
+      .innerHTML =
+      "✅ Daten erfolgreich gespeichert";
+
+} else {
+
+    document
+      .getElementById("personStatus")
+      .innerHTML =
+      "❌ Fehler beim Speichern";
+
+}
+
 
     loadOverview();
 
@@ -591,28 +676,13 @@ async function loadOverview(){
                     🟢 Ja (${yes.length})
                     </p>
 
-                    ${yes.map(
-                        p =>
-                        `${p.firstName} ${p.lastName}<br>`
-                    ).join("")}
-
                     <p>
                     🟡 Vielleicht (${maybe.length})
                     </p>
-
-                    ${maybe.map(
-                        p =>
-                        `${p.firstName} ${p.lastName}<br>`
-                    ).join("")}
-
+                    
                     <p>
                     🔴 Nein (${no.length})
                     </p>
-
-                    ${no.map(
-                        p =>
-                        `${p.firstName} ${p.lastName}<br>`
-                    ).join("")}
 
                 </div>
 
@@ -752,7 +822,8 @@ async function loginAdmin(){
       .style.display = "block";
 
     createWeekendButtons();
-    loadHelperOverview();
+	loadHelperOverview();
+	loadAdminOverview();
 
 }
 ``
@@ -926,6 +997,90 @@ async function loadHelperOverview(){
             `;
 
         });
+
+}
+async function loadAdminOverview(){
+
+    const response =
+        await fetch(SCRIPT_URL);
+
+    const data =
+        await response.json();
+
+    const container =
+        document.getElementById(
+            "adminOverview"
+        );
+
+    container.innerHTML = "";
+
+    shifts.forEach(shift => {
+
+        const yes =
+            data.filter(
+                d =>
+                d.shift === shift.label &&
+                d.status === "Ja"
+            );
+
+        const maybe =
+            data.filter(
+                d =>
+                d.shift === shift.label &&
+                d.status === "Vielleicht"
+            );
+
+        const no =
+            data.filter(
+                d =>
+                d.shift === shift.label &&
+                d.status === "Nein"
+            );
+
+        container.innerHTML += `
+
+        <div class="overview-card">
+
+            <h3>${shift.label}</h3>
+
+            <p>
+            <strong>
+            🟢 Ja (${yes.length})
+            </strong>
+            </p>
+
+            ${yes.map(
+                p =>
+                `${p.firstName} ${p.lastName}<br>`
+            ).join("")}
+
+            <p>
+            <strong>
+            🟡 Vielleicht (${maybe.length})
+            </strong>
+            </p>
+
+            ${maybe.map(
+                p =>
+                `${p.firstName} ${p.lastName}<br>`
+            ).join("")}
+
+            <p>
+            <strong>
+            🔴 Nein (${no.length})
+            </strong>
+            </p>
+
+            ${no.map(
+                p =>
+                `${p.firstName} ${p.lastName}<br>`
+            ).join("")}
+
+        </div>
+
+        `;
+
+    });
 
 }
 
