@@ -197,6 +197,14 @@ style="display:none;"
 
 <div id="weekendExports"></div>
 
+<hr>
+
+<h3>👥 Helferübersicht</h3>
+
+<div id="helperOverview">
+Noch nicht geladen
+</div>
+
 </div>
 
 <div id="overview">
@@ -285,8 +293,7 @@ function renderShifts(){
 <input
 type="radio"
 name="${shift.id}"
-value="Ja"
-checked>
+value="Ja">
 🟢 Ja
 </label>
 
@@ -707,14 +714,29 @@ function showAdminLogin(){
     adminLogin.style.display = "block";
 
 }
-function loginAdmin(){
+async function loginAdmin(){
 
     const password =
       document
       .getElementById("adminPassword")
       .value;
 
-    if(password !== "BB26"){
+    const response =
+      await fetch(
+        SCRIPT_URL,
+        {
+          method:"POST",
+          body:JSON.stringify({
+            action:"adminLogin",
+            password:password
+          })
+        }
+      );
+
+    const result =
+      await response.json();
+
+    if(!result.success){
 
         alert("Falsches Passwort");
         return;
@@ -730,8 +752,10 @@ function loginAdmin(){
       .style.display = "block";
 
     createWeekendButtons();
+    loadHelperOverview();
 
 }
+``
 function downloadCSV(content,fileName){
 
     const blob =
@@ -817,6 +841,91 @@ async function exportWeekend(shiftName){
       shiftName.replaceAll(" ","_") +
       ".csv"
     );
+
+}
+async function loadHelperOverview(){
+
+    const response =
+        await fetch(SCRIPT_URL);
+
+    const data =
+        await response.json();
+
+    const container =
+        document.getElementById(
+            "helperOverview"
+        );
+
+    container.innerHTML = "";
+
+    const helpers = {};
+
+    data.forEach(entry => {
+
+        const name =
+            entry.firstName +
+            " " +
+            entry.lastName;
+
+        if(!helpers[name]){
+
+            helpers[name] = {
+                ja:0,
+                vielleicht:0,
+                nein:0
+            };
+
+        }
+
+        if(entry.status === "Ja"){
+            helpers[name].ja++;
+        }
+
+        if(entry.status === "Vielleicht"){
+            helpers[name].vielleicht++;
+        }
+
+        if(entry.status === "Nein"){
+            helpers[name].nein++;
+        }
+
+    });
+
+    Object.keys(helpers)
+        .sort()
+        .forEach(name => {
+
+            const h =
+                helpers[name];
+
+            container.innerHTML += `
+                <div
+                style="
+                border:1px solid #ddd;
+                border-radius:8px;
+                padding:10px;
+                margin-bottom:10px;
+                ">
+                    <strong>${name}</strong>
+
+                    <br>
+
+                    ✅ Ja: ${h.ja}
+
+                    <br>
+
+                    🟡 Vielleicht:
+                    ${h.vielleicht}
+
+                    <br>
+
+                    🔴 Nein:
+                    ${h.nein}
+
+                </div>
+            `;
+
+        });
 
 }
 
