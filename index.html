@@ -7,109 +7,255 @@
 <title>Mobile Obstpresse Baiersbronn</title>
 
 <style>
-body{
-    font-family:Arial,sans-serif;
-    background:#f4f4f4;
-    margin:0;
-    padding:20px;
+* {
+    box-sizing: border-box;
 }
 
-.container{
-    max-width:1000px;
-    margin:auto;
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    color: #222;
 }
 
-.card{
-    background:white;
-    padding:20px;
-    margin-bottom:20px;
-    border-radius:10px;
-    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+.container {
+    max-width: 1000px;
+    margin: auto;
 }
 
-input{
-    width:100%;
-    padding:10px;
-    margin-bottom:10px;
-    box-sizing:border-box;
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-button{
-    background:#2e7d32;
-    color:white;
-    border:none;
-    border-radius:6px;
-    padding:12px 20px;
-    cursor:pointer;
+.header-card {
+    text-align: center;
 }
 
-.shift{
-    border:1px solid #ddd;
-    border-radius:8px;
-    padding:10px;
-    margin-bottom:10px;
+.logo {
+    max-width: 100px;
+    margin: 0 auto 10px;
+    display: block;
 }
 
-.overview-card{
-    border:1px solid #ddd;
-    border-radius:8px;
-    margin-bottom:15px;
-    padding:10px;
-    background:#fff;
-}
-.radio-group{
-    display:flex;
-    gap:10px;
-    margin-top:10px;
-    flex-wrap:wrap;
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
 }
 
-.choice{
-    padding:8px 12px;
-    border:1px solid #ddd;
-    border-radius:8px;
-    cursor:pointer;
-    background:white;
+button {
+    background: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 15px;
 }
 
-.choice input{
-    margin-right:5px;
-    width:auto;
+button:hover {
+    background: #256b29;
 }
 
-.yes{
-    background:#e8f5e9;
+button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
 }
 
-.maybe{
-    background:#fff8e1;
+.secondary-button {
+    background: #666;
 }
 
-.no{
-    background:#ffebee;
+.secondary-button:hover {
+    background: #555;
 }
 
-h1,h2,h3{
-    margin-top:0;
+.shift {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
 }
 
-details{
-    margin-top:10px;
-    margin-bottom:15px;
+.radio-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
 }
 
-summary{
-    cursor:pointer;
-    font-weight:bold;
-    padding:10px;
-    background:#f5f5f5;
-    border-radius:8px;
+.choice {
+    padding: 9px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    background: white;
+    display: flex;
+    align-items: center;
 }
 
-summary:hover{
-    background:#eeeeee;
+.choice input {
+    margin: 0 6px 0 0;
+    width: auto;
 }
 
+.yes {
+    background: #e8f5e9;
+}
+
+.maybe {
+    background: #fff8e1;
+}
+
+.no {
+    background: #ffebee;
+}
+
+.overview-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 12px;
+    background: #fff;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-login {
+    display: none;
+    background: #fff3cd;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.admin-panel {
+    display: none;
+}
+
+details {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 8px;
+}
+
+summary:hover {
+    background: #eeeeee;
+}
+
+.export-button {
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.success-message {
+    display: none;
+    background: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.status-message {
+    margin-top: 10px;
+    min-height: 22px;
+}
+
+.info-box {
+    background: #f7f7f7;
+    border-left: 4px solid #2e7d32;
+    padding: 10px 12px;
+    margin: 10px 0 15px;
+    border-radius: 4px;
+}
+
+.progress-wrap {
+    display: none;
+    margin: 15px 0;
+}
+
+.progress-text {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0;
+    background: #2e7d32;
+    transition: width 0.2s ease;
+}
+
+.staffing-good {
+    border-left: 5px solid #2e7d32;
+}
+
+.staffing-maybe {
+    border-left: 5px solid #f9a825;
+}
+
+.staffing-low {
+    border-left: 5px solid #c62828;
+}
+
+.small {
+    font-size: 13px;
+    color: #666;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .admin-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .radio-group {
+        flex-direction: column;
+    }
+
+    .choice {
+        width: 100%;
+    }
+}
 </style>
 </head>
 
@@ -117,483 +263,729 @@ summary:hover{
 
 <div class="container">
 
-<div class="card">
+    <div class="card header-card">
+        <h1>- Terminplanung 2026 -</h1>
+        <h1>🍎 Mobile Obstpresse Baiersbronn 🍎</h1>
 
-<div style="text-align:center;">
-<h1> - Terminplanung 2026 - </h1>
-<h1> 🍎 Mobile Obstpresse Baiersbronn 🍎</h1>
-<div style="text-align:center;">
+        <img
+            src="logo-baiersbronn.png"
+            alt="Gemeinde Baiersbronn"
+            class="logo"
+        >
+    </div>
 
-<img
-src="logo-baiersbronn.png"
-alt="Gemeinde Baiersbronn"
-style="
-max-width:100px;
-margin-bottom
+    <div class="card">
 
-</div>
+        <h2>Bitte Name und Vorname eintragen:</h2>
 
-<div class="card">
+        <div class="info-box">
+            <strong>Wichtiger Hinweis:</strong><br>
+            Die angegebenen Uhrzeiten dienen lediglich als grobe
+            Verfügbarkeitsabfrage. Die tatsächlichen Einsatzzeiten richten sich
+            nach den gebuchten Press-Terminen und können davon abweichen.
+        </div>
 
-<h2>Bitte Name und Vorname eintragen:</h2>
-<h5>Die angegebenen Uhrzeiten dienen lediglich als grobe
-Verfügbarkeitsabfrage. Die tatsächlichen Einsatzzeiten richten sich nach
-den gebuchten Press-Terminen und können davon abweichen.</h5>
+        <input
+            id="firstName"
+            placeholder="Vorname"
+            autocomplete="given-name"
+        >
 
-<input id="firstName" placeholder="Vorname">
+        <input
+            id="lastName"
+            placeholder="Nachname"
+            autocomplete="family-name"
+        >
 
-<input id="lastName" placeholder="Nachname">
+        <button onclick="checkPerson()">
+            Weiter
+        </button>
 
-<button onclick="checkPerson()">
-Weiter
-</button>
+        <div id="personStatus" class="status-message"></div>
 
-<div id="personStatus"></div>
+        <div id="successMessage" class="success-message"></div>
 
-<div
-  id="successMessage"
-  style="
-    display:none;
-    background:#d4edda;
-    color:#155724;
-    padding:15px;
-    border-radius:8px;
-    margin-top:15px;
-    text-align:center;
-    font-weight:bold;
-  ">
-</div>
+        <div id="progressWrap" class="progress-wrap">
+            <div id="progressText" class="progress-text"></div>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+        </div>
 
-<div id="shiftContainer" style="display:none;"></div>
+        <div id="shiftContainer" style="display:none;"></div>
 
-<div id="saveContainer" style="display:none;">
+        <div id="saveContainer" style="display:none;">
+            <button onclick="saveData()">
+                Speichern
+            </button>
+        </div>
 
-<button onclick="saveData()">
-Speichern
-</button>
+    </div>
 
-</div>
+    <div class="card">
 
-</div>
+        <div class="admin-header">
+            <h2>Wer kann wann?</h2>
 
-<div class="card">
+            <button onclick="showAdminLogin()">
+                🔒 Admin
+            </button>
+        </div>
 
-<div style="
-display:flex;
-justify-content:space-between;
-align-items:center;
-">
+        <div
+            id="adminLogin"
+            class="admin-login"
+        >
+            <h3>Admin Anmeldung</h3>
 
-<h2>Wer kann wann?</h2>
+            <input
+                type="password"
+                id="adminPassword"
+                placeholder="Passwort"
+                autocomplete="current-password"
+            >
 
-<button onclick="showAdminLogin()">
-🔒 Admin
-</button>
+            <button onclick="loginAdmin()">
+                Anmelden
+            </button>
 
-</div>
+            <div id="adminLoginStatus" class="status-message"></div>
+        </div>
 
-<div id="adminLogin"
-style="
-display:none;
-background:#fff3cd;
-padding:15px;
-border-radius:8px;
-margin-bottom:15px;
-">
+        <div
+            id="adminPanel"
+            class="admin-panel"
+        >
 
-<h3>Admin Anmeldung</h3>
+            <details>
+                <summary>📥 Exporte</summary>
 
-<input
-type="password"
-id="adminPassword"
-placeholder="Passwort">
+                <br>
 
-<button onclick="loginAdmin()">
-Anmelden
-</button>
+                <button
+                    class="export-button"
+                    onclick="exportAllCSV()"
+                >
+                    Gesamtexport
+                </button>
 
-</div>
+                <div id="weekendExports"></div>
+            </details>
 
-<div
-id="adminPanel"
-style="display:none;"
->
+            <details>
+                <summary>👥 Helferübersicht</summary>
 
-<details>
-    <summary>📥 Exporte</summary>
+                <div id="helperOverview"></div>
 
-    <br>
+                <hr>
 
-    <button onclick="exportAllCSV()">
-        Gesamtexport
-    </button>
+                <h3>👤 Eingetragene Helfer</h3>
 
-    <div id="weekendExports"></div>
+                <div id="participantsList"></div>
+            </details>
 
-</details>
+            <details>
+                <summary>📋 Verfügbarkeiten je Schicht</summary>
 
-<details>
-    <summary>👥 Helferübersicht</summary>
+                <div id="adminOverview"></div>
+            </details>
 
-    <div id="helperOverview"></div>
-	
-	<hr>
+        </div>
 
-<h3>👤 Eingetragene Helfer</h3>
+        <div id="overview">
+            Lade Daten...
+        </div>
 
-<div id="participantsList"></div>
-
-</details>
-
-<details>
-    <summary>📋 Verfügbarkeiten je Schicht</summary>
-
-    <div id="adminOverview"></div>
-
-</details>
-
-<hr>
-
-<h3>👥 Helferübersicht</h3>
-
-<div id="helperOverview">
-Noch nicht geladen
-</div>
-
-</div>
-
-<div id="overview">
-Lade Daten...
-</div>
-
-<div id="overview">
-
-<hr>
-
-</div>
-
-</div>
+    </div>
 
 </div>
 
 <script>
 
 const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbyx0Nu-qokdbEti73VTUS0C9HMv_FaIT93J2F9Xb1bdiowNlt5eiz-VAbCd6aohJjcq/exec";
+    "https://script.google.com/macros/s/AKfycbyx0Nu-qokdbEti73VTUS0C9HMv_FaIT93J2F9Xb1bdiowNlt5eiz-VAbCd6aohJjcq/exec";
 
 const shifts = [];
 
-function createShifts(){
+let isSaving = false;
+let isAdminLoggedIn = false;
 
-    const start = new Date("2026-09-11");
-    const end = new Date("2026-10-31");
 
-    for(
+/* =========================================================
+   HILFSFUNKTIONEN
+   ========================================================= */
+
+function escapeHtml(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+function setProgress(current, total) {
+
+    const wrap = document.getElementById("progressWrap");
+    const text = document.getElementById("progressText");
+    const fill = document.getElementById("progressFill");
+
+    if (!wrap || !text || !fill) {
+        return;
+    }
+
+    if (total <= 0) {
+        wrap.style.display = "none";
+        return;
+    }
+
+    wrap.style.display = "block";
+
+    const percent =
+        Math.round((current / total) * 100);
+
+    fill.style.width = percent + "%";
+
+    text.innerText =
+        `Beantwortete Termine: ${current} von ${total}`;
+}
+
+
+function hideProgress() {
+
+    const wrap = document.getElementById("progressWrap");
+
+    if (wrap) {
+        wrap.style.display = "none";
+    }
+}
+
+
+async function fetchData() {
+
+    const response =
+        await fetch(SCRIPT_URL, {
+            method: "GET",
+            cache: "no-store"
+        });
+
+    if (!response.ok) {
+        throw new Error(
+            "Server antwortete mit HTTP " + response.status
+        );
+    }
+
+    const data =
+        await response.json();
+
+    if (!Array.isArray(data)) {
+        throw new Error("Ungültige Serverantwort");
+    }
+
+    return data;
+}
+
+
+function csvEscape(value) {
+
+    const text = String(value ?? "");
+
+    if (
+        text.includes(";") ||
+        text.includes('"') ||
+        text.includes("\n")
+    ) {
+        return '"' +
+            text.replace(/"/g, '""') +
+            '"';
+    }
+
+    return text;
+}
+
+
+/* =========================================================
+   TERMINE ERSTELLEN
+   ========================================================= */
+
+function createShifts() {
+
+    const start =
+        new Date("2026-09-11T00:00:00");
+
+    const end =
+        new Date("2026-10-31T00:00:00");
+
+    shifts.length = 0;
+
+    for (
         let d = new Date(start);
         d <= end;
-        d.setDate(d.getDate()+1)
-    ){
+        d.setDate(d.getDate() + 1)
+    ) {
 
-        const weekday = d.getDay();
-        const date = d.toLocaleDateString("de-DE");
+        const weekday =
+            d.getDay();
 
-        if(weekday === 5){
+        const date =
+            d.toLocaleDateString("de-DE");
+
+        if (weekday === 5) {
 
             shifts.push({
                 id: date + "-fr",
-                label: date + " (Freitag) 13:00 - 19:00"
+                label:
+                    date +
+                    " (Freitag) 13:00 - 19:00"
             });
-
         }
 
-        if(weekday === 6){
+        if (weekday === 6) {
 
             shifts.push({
                 id: date + "-sa1",
-                label: date + " (Samstag) 07:00 - 12:00"
+                label:
+                    date +
+                    " (Samstag) 07:00 - 12:00"
             });
 
             shifts.push({
                 id: date + "-sa2",
-                label: date + " (Samstag) 12:00 - 19:00"
+                label:
+                    date +
+                    " (Samstag) 12:00 - 19:00"
             });
-
         }
     }
 
     renderShifts();
 }
 
-function renderShifts(){
+
+/* =========================================================
+   SCHICHTEN ANZEIGEN
+   ========================================================= */
+
+function renderShifts() {
 
     const container =
         document.getElementById("shiftContainer");
 
     container.innerHTML = "";
 
-    shifts.forEach((shift)=>{
+    shifts.forEach((shift) => {
 
         container.innerHTML += `
             <div class="shift">
+                <strong>${escapeHtml(shift.label)}</strong>
 
-                <strong>${shift.label}</strong>
+                <div class="radio-group">
 
-<div class="radio-group">
+                    <label class="choice yes">
+                        <input
+                            type="radio"
+                            name="${escapeHtml(shift.id)}"
+                            value="Ja"
+                            onchange="updateProgress()"
+                        >
+                        🟢 Ja
+                    </label>
 
-<label class="choice yes">
-<input
-type="radio"
-name="${shift.id}"
-value="Ja">
-🟢 Ja
-</label>
+                    <label class="choice maybe">
+                        <input
+                            type="radio"
+                            name="${escapeHtml(shift.id)}"
+                            value="Vielleicht"
+                            onchange="updateProgress()"
+                        >
+                        🟡 Vielleicht
+                    </label>
 
-<label class="choice maybe">
-<input
-type="radio"
-name="${shift.id}"
-value="Vielleicht">
-🟡 Vielleicht
-</label>
+                    <label class="choice no">
+                        <input
+                            type="radio"
+                            name="${escapeHtml(shift.id)}"
+                            value="Nein"
+                            onchange="updateProgress()"
+                        >
+                        🔴 Nein
+                    </label>
 
-<label class="choice no">
-<input
-type="radio"
-name="${shift.id}"
-value="Nein">
-🔴 Nein
-</label>
-
-</div>
-
+                </div>
             </div>
         `;
-
     });
 
+    updateProgress();
 }
 
-async function saveData(){
 
-    const firstName =
-        document.getElementById("firstName").value.trim();
+function updateProgress() {
 
-    const lastName =
-        document.getElementById("lastName").value.trim();
+    let answered = 0;
 
-    if(!firstName || !lastName){
+    shifts.forEach(shift => {
 
-        alert(
-          "Bitte Vor- und Nachname eingeben."
-        );
+        const selected =
+            document.querySelector(
+                `input[name="${CSS.escape(shift.id)}"]:checked`
+            );
 
-        return;
-    }
-	const missingShifts = [];
-
-	for(const shift of shifts){
-
-    const selected =
-        document.querySelector(
-            `input[name="${shift.id}"]:checked`
-        );
-
-    if(!selected){
-
-        missingShifts.push(shift.label);
-
-    }
-
-}
-if(missingShifts.length > 0){
-
-    const proceed =
-        confirm(
-            `Es wurden ${missingShifts.length} Termine noch nicht beantwortet.\n\nTrotzdem speichern?`
-        );
-
-    if(!proceed){
-        return;
-    }
-
-}
-   const entries = [];
-
-for(const shift of shifts){
-
-    const selected =
-        document.querySelector(
-            `input[name="${shift.id}"]:checked`
-        );
-
-    if(!selected){
-        continue;
-    }
-
-    entries.push({
-        shift: shift.label,
-        status: selected.value
+        if (selected) {
+            answered++;
+        }
     });
 
-}
-
-const response =
-  await fetch(
-    SCRIPT_URL,
-    {
-      method:"POST",
-      body:JSON.stringify({
-        firstName,
-        lastName,
-        entries
-      })
-    }
-  );
-
-const result =
-  await response.json();
-
-if(result.success){
-
-    document
-      .getElementById("successMessage")
-      .innerHTML =
-      "🍎 Vielen Dank für deine Unterstützung bei der Mobilen Obstpresse Baiersbronn.\n\nDeine Verfügbarkeit wurde erfolgreich gespeichert.\n\nWir wünschen dir bereits jetzt frohes Mosten! 🚜";;
-
-    document
-      .getElementById("successMessage")
-      .style.display = "block";
-
-    document
-      .getElementById("successMessage")
-      .scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-      });
-
-    setTimeout(() => {
-
-        document
-          .getElementById("successMessage")
-          .style.display = "none";
-
-    }, 8000);
-
-    document
-      .getElementById("firstName")
-      .value = "";
-
-    document
-      .getElementById("lastName")
-      .value = "";
-
-    document
-      .getElementById("shiftContainer")
-      .style.display = "none";
-
-    document
-      .getElementById("saveContainer")
-      .style.display = "none";
-
-    loadOverview();
-
-} else {
-
-    document
-      .getElementById("personStatus")
-      .innerHTML =
-      "❌ Fehler beim Speichern";
-
-}
-
-
-    loadOverview();
-
-}
-async function exportAllCSV(){
-
-    const response =
-      await fetch(SCRIPT_URL);
-
-    const data =
-      await response.json();
-
-    let csv =
-      "Vorname;Nachname;Schicht;Status\n";
-
-    data.forEach(row => {
-
-        csv +=
-          `${row.firstName};${row.lastName};${row.shift};${row.status}\n`;
-
-    });
-
-    downloadCSV(
-      csv,
-      "Obstpresse-Gesamt.csv"
+    setProgress(
+        answered,
+        shifts.length
     );
-
 }
 
-async function loadParticipantList(){
 
-    const response =
-        await fetch(SCRIPT_URL);
+/* =========================================================
+   DATEN SPEICHERN
+   ========================================================= */
 
-    const data =
-        await response.json();
+async function saveData() {
 
-    const participants =
-        document.getElementById(
-            "participantsList"
+    if (isSaving) {
+        return;
+    }
+
+    isSaving = true;
+
+    const saveButton =
+        document.querySelector(
+            "#saveContainer button"
         );
 
-    participants.innerHTML = "";
+    saveButton.disabled = true;
+    saveButton.innerText = "Speichere...";
 
-    const uniqueNames = [];
+    try {
 
-    data.forEach(entry=>{
+        const firstName =
+            document
+                .getElementById("firstName")
+                .value
+                .trim();
 
-        const fullName =
-            entry.firstName +
-            " " +
-            entry.lastName;
+        const lastName =
+            document
+                .getElementById("lastName")
+                .value
+                .trim();
 
-        if(
-            !uniqueNames.includes(fullName)
-        ){
-            uniqueNames.push(fullName);
+        if (!firstName || !lastName) {
+
+            alert(
+                "Bitte Vor- und Nachname eingeben."
+            );
+
+            return;
         }
 
-    });
+        const missingShifts = [];
+        const entries = [];
 
-    uniqueNames.sort();
+        for (const shift of shifts) {
 
-    uniqueNames.forEach(name=>{
+            const selected =
+                document.querySelector(
+                    `input[name="${CSS.escape(shift.id)}"]:checked`
+                );
 
-        participants.innerHTML += `
-            <div
-            style="
-            padding:8px;
-            border-bottom:1px solid #ddd;
-            ">
-                ${name}
-            </div>
-        `;
+            if (!selected) {
 
-    });
+                missingShifts.push(
+                    shift.label
+                );
 
+                continue;
+            }
+
+            entries.push({
+                shift: shift.label,
+                status: selected.value
+            });
+        }
+
+        if (missingShifts.length > 0) {
+
+            const proceed =
+                confirm(
+                    "Folgende Termine wurden noch nicht beantwortet:\n\n" +
+                    missingShifts.join("\n") +
+                    "\n\nTrotzdem speichern?"
+                );
+
+            if (!proceed) {
+                return;
+            }
+        }
+
+        if (entries.length === 0) {
+
+            document
+                .getElementById("personStatus")
+                .innerHTML =
+                "❌ Bitte mindestens einen Termin auswählen.";
+
+            return;
+        }
+
+        const response =
+            await fetch(
+                SCRIPT_URL,
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        firstName,
+                        lastName,
+                        entries
+                    })
+                }
+            );
+
+        if (!response.ok) {
+            throw new Error(
+                "Server antwortete mit HTTP " +
+                response.status
+            );
+        }
+
+        const result =
+            await response.json();
+
+        if (result.success) {
+
+            document
+                .getElementById("successMessage")
+                .innerHTML =
+                "🍎 Vielen Dank für deine Unterstützung bei der Mobilen Obstpresse Baiersbronn." +
+                "<br><br>" +
+                "Deine Verfügbarkeit wurde erfolgreich gespeichert." +
+                "<br><br>" +
+                "Wir wünschen dir bereits jetzt frohes Mosten! 🚜";
+
+            document
+                .getElementById("successMessage")
+                .style.display = "block";
+
+            document
+                .getElementById("successMessage")
+                .scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+            setTimeout(() => {
+
+                document
+                    .getElementById("successMessage")
+                    .style.display = "none";
+
+            }, 8000);
+
+            document
+                .getElementById("firstName")
+                .value = "";
+
+            document
+                .getElementById("lastName")
+                .value = "";
+
+            document
+                .getElementById("shiftContainer")
+                .style.display = "none";
+
+            document
+                .getElementById("saveContainer")
+                .style.display = "none";
+
+            document
+                .getElementById("personStatus")
+                .innerHTML = "";
+
+            hideProgress();
+
+            loadOverview();
+
+        } else {
+
+            document
+                .getElementById("personStatus")
+                .innerHTML =
+                "❌ Fehler beim Speichern.";
+        }
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+        document
+            .getElementById("personStatus")
+            .innerHTML =
+            "❌ Server nicht erreichbar. Bitte später erneut versuchen.";
+
+    }
+    finally {
+
+        isSaving = false;
+
+        saveButton.disabled = false;
+        saveButton.innerText = "Speichern";
+    }
 }
 
-async function checkPerson(){
+
+/* =========================================================
+   GESAMTEXPORT
+   ========================================================= */
+
+async function exportAllCSV() {
+
+    try {
+
+        const data =
+            await fetchData();
+
+        let csv =
+            "Vorname;Nachname;Schicht;Status\n";
+
+        data.forEach(row => {
+
+            csv +=
+                csvEscape(row.firstName) + ";" +
+                csvEscape(row.lastName) + ";" +
+                csvEscape(row.shift) + ";" +
+                csvEscape(row.status) +
+                "\n";
+        });
+
+        downloadCSV(
+            csv,
+            "Obstpresse-Gesamt.csv"
+        );
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+        alert(
+            "❌ Der Gesamtexport konnte nicht geladen werden."
+        );
+    }
+}
+
+
+/* =========================================================
+   TEILNEHMERLISTE
+   ========================================================= */
+
+async function loadParticipantList() {
+
+    if (!isAdminLoggedIn) {
+        return;
+    }
+
+    try {
+
+        const data =
+            await fetchData();
+
+        const participants =
+            document.getElementById(
+                "participantsList"
+            );
+
+        participants.innerHTML = "";
+
+        const uniqueNames =
+            new Set();
+
+        data.forEach(entry => {
+
+            const first =
+                String(entry.firstName ?? "").trim();
+
+            const last =
+                String(entry.lastName ?? "").trim();
+
+            if (!first && !last) {
+                return;
+            }
+
+            uniqueNames.add(
+                `${first} ${last}`.trim()
+            );
+        });
+
+        const names =
+            Array.from(uniqueNames)
+                .sort((a, b) =>
+                    a.localeCompare(
+                        b,
+                        "de"
+                    )
+                );
+
+        if (names.length === 0) {
+
+            participants.innerHTML =
+                "<p class='small'>Noch keine Helfer eingetragen.</p>";
+
+            return;
+        }
+
+        names.forEach(name => {
+
+            participants.innerHTML += `
+                <div style="
+                    padding:8px;
+                    border-bottom:1px solid #ddd;
+                ">
+                    ${escapeHtml(name)}
+                </div>
+            `;
+        });
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+        document
+            .getElementById("participantsList")
+            .innerHTML =
+            "❌ Helferliste konnte nicht geladen werden.";
+    }
+}
+
+
+/* =========================================================
+   PERSON PRÜFEN / VORHANDENE DATEN LADEN
+   ========================================================= */
+
+async function checkPerson() {
 
     const firstName =
-        document.getElementById("firstName").value.trim();
+        document
+            .getElementById("firstName")
+            .value
+            .trim();
 
     const lastName =
-        document.getElementById("lastName").value.trim();
+        document
+            .getElementById("lastName")
+            .value
+            .trim();
 
-    if(!firstName || !lastName){
+    if (!firstName || !lastName) {
 
         alert(
             "Bitte Vor- und Nachname eingeben."
@@ -602,99 +994,111 @@ async function checkPerson(){
         return;
     }
 
-    const response =
-        await fetch(SCRIPT_URL);
-
-    const data =
-        await response.json();
-
-    const personEntries =
-        data.filter(entry =>
-
-            entry.firstName
-                .trim()
-                .toLowerCase() ===
-            firstName
-                .trim()
-                .toLowerCase()
-
-            &&
-
-            entry.lastName
-                .trim()
-                .toLowerCase() ===
-            lastName
-                .trim()
-                .toLowerCase()
-
+    const status =
+        document.getElementById(
+            "personStatus"
         );
 
-    const status =
-        document.getElementById("personStatus");
-
-    document
-        .getElementById("shiftContainer")
-        .style.display = "block";
-
-    document
-        .getElementById("saveContainer")
-        .style.display = "block";
-
-    if(personEntries.length === 0){
-
-        status.innerHTML =
-            "✅ Neuer Eintrag";
-
-        renderShifts();
-
-        return;
-    }
-
     status.innerHTML =
-        "✅ Vorhandene Daten gefunden";
+        "⏳ Daten werden geprüft...";
 
-    renderShifts();
+    try {
 
-    personEntries.forEach(entry => {
+        const data =
+            await fetchData();
 
-        const shift =
-            shifts.find(
-                s => s.label === entry.shift
+        const personEntries =
+            data.filter(entry =>
+
+                String(entry.firstName ?? "")
+                    .trim()
+                    .toLowerCase() ===
+                firstName.toLowerCase()
+
+                &&
+
+                String(entry.lastName ?? "")
+                    .trim()
+                    .toLowerCase() ===
+                lastName.toLowerCase()
             );
 
-        if(!shift){
+        document
+            .getElementById("shiftContainer")
+            .style.display = "block";
+
+        document
+            .getElementById("saveContainer")
+            .style.display = "block";
+
+        if (personEntries.length === 0) {
+
+            status.innerHTML =
+                "✅ Neuer Eintrag";
+
+            renderShifts();
+
             return;
         }
 
-        const radio =
-            document.querySelector(
-                `input[name="${shift.id}"][value="${entry.status}"]`
-            );
+        status.innerHTML =
+            "✅ Vorhandene Daten gefunden";
 
-        if(radio){
-            radio.checked = true;
-        }
+        renderShifts();
 
-    });
+        personEntries.forEach(entry => {
 
+            const shift =
+                shifts.find(
+                    s => s.label === entry.shift
+                );
+
+            if (!shift) {
+                return;
+            }
+
+            const radio =
+                document.querySelector(
+                    `input[name="${CSS.escape(shift.id)}"][value="${CSS.escape(entry.status)}"]`
+                );
+
+            if (radio) {
+                radio.checked = true;
+            }
+        });
+
+        updateProgress();
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+        status.innerHTML =
+            "❌ Daten konnten nicht geladen werden.";
+    }
 }
 
-async function loadOverview(){
 
-    try{
+/* =========================================================
+   ÖFFENTLICHE ÜBERSICHT
+   ========================================================= */
 
-        const response =
-            await fetch(SCRIPT_URL);
+async function loadOverview() {
+
+    try {
 
         const data =
-            await response.json();
+            await fetchData();
 
         const overview =
-            document.getElementById("overview");
+            document.getElementById(
+                "overview"
+            );
 
         overview.innerHTML = "";
 
-        shifts.forEach((shift)=>{
+        shifts.forEach(shift => {
 
             const yes =
                 data.filter(
@@ -718,317 +1122,379 @@ async function loadOverview(){
                 );
 
             overview.innerHTML += `
-
                 <div class="overview-card">
 
-                    <h3>${shift.label}</h3>
+                    <h3>
+                        ${escapeHtml(shift.label)}
+                    </h3>
 
                     <p>
-                    🟢 Ja (${yes.length})
+                        🟢 Ja (${yes.length})
                     </p>
 
                     <p>
-                    🟡 Vielleicht (${maybe.length})
+                        🟡 Vielleicht (${maybe.length})
                     </p>
-                    
+
                     <p>
-                    🔴 Nein (${no.length})
+                        🔴 Nein (${no.length})
                     </p>
 
                 </div>
-
             `;
-
         });
 
     }
-    catch(error){
+    catch (error) {
 
         console.error(error);
 
-        document.getElementById("overview").innerHTML =
-            "Fehler beim Laden der Daten.";
-
+        document
+            .getElementById("overview")
+            .innerHTML =
+            "❌ Fehler beim Laden der Übersicht.";
     }
-
 }
-async function loadExistingData(){
 
-    const firstName =
-        document.getElementById("firstName").value.trim();
 
-    const lastName =
-        document.getElementById("lastName").value.trim();
+/* =========================================================
+   ADMIN LOGIN
+   ========================================================= */
 
-    if(!firstName || !lastName){
-        return;
-    }
-
-    const response =
-        await fetch(SCRIPT_URL);
-
-    const data =
-        await response.json();
-
-    const personEntries =
-        data.filter(
-            entry =>
-            entry.firstName === firstName &&
-            entry.lastName === lastName
-        );
-
-    if(personEntries.length === 0){
-        return;
-    }
-
-    personEntries.forEach(entry => {
-
-        const shift =
-            shifts.find(
-                s => s.label === entry.shift
-            );
-
-        if(!shift){
-            return;
-        }
-
-        const radio =
-            document.querySelector(
-                `input[name="${shift.id}"][value="${entry.status}"]`
-            );
-
-        if(radio){
-            radio.checked = true;
-        }
-
-    });
-
-    alert(
-        "Vorhandener Eintrag gefunden und geladen."
-    );
-
-}
-function showAdminLogin(){
+function showAdminLogin() {
 
     const adminPanel =
-      document.getElementById("adminPanel");
+        document.getElementById(
+            "adminPanel"
+        );
 
     const adminLogin =
-      document.getElementById("adminLogin");
+        document.getElementById(
+            "adminLogin"
+        );
 
-    // Bereits eingeloggt?
-    if(adminPanel.style.display === "block"){
+    if (adminPanel.style.display === "block") {
 
         adminPanel.style.display = "none";
         adminLogin.style.display = "none";
 
-        document.getElementById(
-          "adminPassword"
-        ).value = "";
+        isAdminLoggedIn = false;
+
+        document
+            .getElementById("adminPassword")
+            .value = "";
+
+        document
+            .getElementById("adminLoginStatus")
+            .innerHTML = "";
 
         alert("Admin abgemeldet");
 
         return;
     }
 
-    // Login-Fenster anzeigen
     adminLogin.style.display = "block";
 
+    document
+        .getElementById("adminPassword")
+        .focus();
 }
-async function loginAdmin(){
+
+
+async function loginAdmin() {
 
     const password =
-      document
-      .getElementById("adminPassword")
-      .value;
+        document
+            .getElementById("adminPassword")
+            .value;
 
-    const response =
-      await fetch(
-        SCRIPT_URL,
-        {
-          method:"POST",
-          body:JSON.stringify({
-            action:"adminLogin",
-            password:password
-          })
-        }
-      );
-
-    const result =
-      await response.json();
-
-    if(!result.success){
-
-        alert("Falsches Passwort");
-        return;
-
-    }
-
-    document
-      .getElementById("adminLogin")
-      .style.display = "none";
-
-    document
-      .getElementById("adminPanel")
-      .style.display = "block";
-
-    createWeekendButtons();
-	loadHelperOverview();
-	loadAdminOverview();
-
-}
-``
-function downloadCSV(content,fileName){
-
-    const blob =
-      new Blob(
-        [content],
-        {
-          type:"text/csv;charset=utf-8;"
-        }
-      );
-
-    const link =
-      document.createElement("a");
-
-    link.href =
-      URL.createObjectURL(blob);
-
-    link.download =
-      fileName;
-
-    link.click();
-
-}
-function createWeekendButtons(){
-
-    const container =
-      document.getElementById(
-        "weekendExports"
-      );
-
-    container.innerHTML="";
-
-    shifts.forEach(shift=>{
-
-        const btn =
-          document.createElement("button");
-
-        btn.innerText =
-          "📥 " + shift.label;
-
-        btn.style.marginBottom =
-          "5px";
-
-        btn.onclick =
-          () => exportWeekend(
-              shift.label
-            );
-
-        container.appendChild(btn);
-
-        container.appendChild(
-          document.createElement("br")
+    const loginStatus =
+        document.getElementById(
+            "adminLoginStatus"
         );
 
-    });
+    if (!password) {
 
+        loginStatus.innerHTML =
+            "❌ Bitte Passwort eingeben.";
+
+        return;
+    }
+
+    loginStatus.innerHTML =
+        "⏳ Anmeldung wird geprüft...";
+
+    try {
+
+        const response =
+            await fetch(
+                SCRIPT_URL,
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        action: "adminLogin",
+                        password: password
+                    })
+                }
+            );
+
+        if (!response.ok) {
+            throw new Error(
+                "Server antwortete mit HTTP " +
+                response.status
+            );
+        }
+
+        const result =
+            await response.json();
+
+        if (!result.success) {
+
+            loginStatus.innerHTML =
+                "❌ Falsches Passwort.";
+
+            return;
+        }
+
+        isAdminLoggedIn = true;
+
+        document
+            .getElementById("adminLogin")
+            .style.display = "none";
+
+        document
+            .getElementById("adminPanel")
+            .style.display = "block";
+
+        document
+            .getElementById("adminPassword")
+            .value = "";
+
+        loginStatus.innerHTML = "";
+
+        createWeekendButtons();
+        loadHelperOverview();
+        loadParticipantList();
+        loadAdminOverview();
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+        loginStatus.innerHTML =
+            "❌ Anmeldung momentan nicht möglich.";
+    }
 }
-async function exportWeekend(shiftName){
 
-    const response =
-      await fetch(SCRIPT_URL);
 
-    const data =
-      await response.json();
+/* =========================================================
+   CSV DOWNLOAD
+   ========================================================= */
 
-    const filtered =
-      data.filter(
-        d =>
-          d.shift === shiftName
-      );
+function downloadCSV(content, fileName) {
 
-    let csv =
-      "Vorname;Nachname;Status\n";
+    const blob =
+        new Blob(
+            ["\ufeff" + content],
+            {
+                type: "text/csv;charset=utf-8;"
+            }
+        );
 
-    filtered.forEach(row=>{
+    const link =
+        document.createElement("a");
 
-        csv +=
-          `${row.firstName};${row.lastName};${row.status}\n`;
+    const url =
+        URL.createObjectURL(blob);
 
-    });
+    link.href = url;
+    link.download = fileName;
 
-    downloadCSV(
-      csv,
-      shiftName.replaceAll(" ","_") +
-      ".csv"
-    );
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
 
+    setTimeout(() => {
+        URL.revokeObjectURL(url);
+    }, 1000);
 }
-async function loadHelperOverview(){
 
-    const response =
-        await fetch(SCRIPT_URL);
 
-    const data =
-        await response.json();
+/* =========================================================
+   EINZELEXPORTE JE SCHICHT
+   ========================================================= */
+
+function createWeekendButtons() {
 
     const container =
         document.getElementById(
-            "helperOverview"
+            "weekendExports"
         );
 
     container.innerHTML = "";
 
-    const helpers = {};
+    shifts.forEach(shift => {
 
-    data.forEach(entry => {
+        const btn =
+            document.createElement("button");
 
-        const name =
-            entry.firstName +
-            " " +
-            entry.lastName;
+        btn.className =
+            "export-button";
 
-        if(!helpers[name]){
+        btn.innerText =
+            "📥 " + shift.label;
 
-            helpers[name] = {
-                ja:0,
-                vielleicht:0,
-                nein:0
-            };
+        btn.onclick =
+            () => exportWeekend(
+                shift.label
+            );
 
-        }
-
-        if(entry.status === "Ja"){
-            helpers[name].ja++;
-        }
-
-        if(entry.status === "Vielleicht"){
-            helpers[name].vielleicht++;
-        }
-
-        if(entry.status === "Nein"){
-            helpers[name].nein++;
-        }
-
+        container.appendChild(btn);
+        container.appendChild(
+            document.createElement("br")
+        );
     });
+}
 
-    Object.keys(helpers)
-        .sort()
-        .forEach(name => {
+
+async function exportWeekend(shiftName) {
+
+    try {
+
+        const data =
+            await fetchData();
+
+        const filtered =
+            data.filter(
+                d =>
+                d.shift === shiftName
+            );
+
+        let csv =
+            "Vorname;Nachname;Status\n";
+
+        filtered.forEach(row => {
+
+            csv +=
+                csvEscape(row.firstName) + ";" +
+                csvEscape(row.lastName) + ";" +
+                csvEscape(row.status) +
+                "\n";
+        });
+
+        const safeFileName =
+            shiftName
+                .replace(/[^\wÄÖÜäöüß -]/g, "")
+                .replace(/\s+/g, "_");
+
+        downloadCSV(
+            csv,
+            safeFileName + ".csv"
+        );
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+        alert(
+            "❌ Der Export für diese Schicht konnte nicht geladen werden."
+        );
+    }
+}
+
+
+/* =========================================================
+   HELFERÜBERSICHT
+   ========================================================= */
+
+async function loadHelperOverview() {
+
+    if (!isAdminLoggedIn) {
+        return;
+    }
+
+    try {
+
+        const data =
+            await fetchData();
+
+        const container =
+            document.getElementById(
+                "helperOverview"
+            );
+
+        container.innerHTML = "";
+
+        const helpers = {};
+
+        data.forEach(entry => {
+
+            const first =
+                String(entry.firstName ?? "").trim();
+
+            const last =
+                String(entry.lastName ?? "").trim();
+
+            const name =
+                `${first} ${last}`.trim();
+
+            if (!name) {
+                return;
+            }
+
+            if (!helpers[name]) {
+
+                helpers[name] = {
+                    ja: 0,
+                    vielleicht: 0,
+                    nein: 0
+                };
+            }
+
+            if (entry.status === "Ja") {
+                helpers[name].ja++;
+            }
+
+            if (entry.status === "Vielleicht") {
+                helpers[name].vielleicht++;
+            }
+
+            if (entry.status === "Nein") {
+                helpers[name].nein++;
+            }
+        });
+
+        const names =
+            Object.keys(helpers)
+                .sort((a, b) =>
+                    a.localeCompare(
+                        b,
+                        "de"
+                    )
+                );
+
+        if (names.length === 0) {
+
+            container.innerHTML =
+                "<p class='small'>Noch keine Helfer eingetragen.</p>";
+
+            return;
+        }
+
+        names.forEach(name => {
 
             const h =
                 helpers[name];
 
             container.innerHTML += `
                 <div
-                style="
-                border:1px solid #ddd;
-                border-radius:8px;
-                padding:10px;
-                margin-bottom:10px;
-                ">
-                    <strong>${name}</strong>
+                    class="overview-card"
+                >
+                    <strong>
+                        ${escapeHtml(name)}
+                    </strong>
 
                     <br>
 
@@ -1036,128 +1502,193 @@ async function loadHelperOverview(){
 
                     <br>
 
-                    🟡 Vielleicht:
-                    ${h.vielleicht}
+                    🟡 Vielleicht: ${h.vielleicht}
 
                     <br>
 
-                    🔴 Nein:
-                    ${h.nein}
+                    🔴 Nein: ${h.nein}
+                </div>
+            `;
+        });
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+        document
+            .getElementById("helperOverview")
+            .innerHTML =
+            "❌ Helferübersicht konnte nicht geladen werden.";
+    }
+}
+
+
+/* =========================================================
+   ADMIN-ÜBERSICHT JE SCHICHT
+   ========================================================= */
+
+async function loadAdminOverview() {
+
+    if (!isAdminLoggedIn) {
+        return;
+    }
+
+    try {
+
+        const data =
+            await fetchData();
+
+        const container =
+            document.getElementById(
+                "adminOverview"
+            );
+
+        container.innerHTML = "";
+
+        shifts.forEach(shift => {
+
+            const yes =
+                data.filter(
+                    d =>
+                    d.shift === shift.label &&
+                    d.status === "Ja"
+                );
+
+            const maybe =
+                data.filter(
+                    d =>
+                    d.shift === shift.label &&
+                    d.status === "Vielleicht"
+                );
+
+            const no =
+                data.filter(
+                    d =>
+                    d.shift === shift.label &&
+                    d.status === "Nein"
+                );
+
+            let staffingClass =
+                "staffing-low";
+
+            if (yes.length >= 3) {
+                staffingClass = "staffing-good";
+            }
+            else if (yes.length >= 1) {
+                staffingClass = "staffing-maybe";
+            }
+
+            container.innerHTML += `
+                <div
+                    class="overview-card ${staffingClass}"
+                >
+
+                    <h3>
+                        ${escapeHtml(shift.label)}
+                    </h3>
+
+                    <p>
+                        <strong>
+                            🟢 Ja (${yes.length})
+                        </strong>
+                    </p>
+
+                    ${
+                        yes.length
+                            ? yes.map(
+                                p =>
+                                `${escapeHtml(p.firstName)} ${escapeHtml(p.lastName)}<br>`
+                            ).join("")
+                            : "<span class='small'>Niemand</span>"
+                    }
+
+                    <p>
+                        <strong>
+                            🟡 Vielleicht (${maybe.length})
+                        </strong>
+                    </p>
+
+                    ${
+                        maybe.length
+                            ? maybe.map(
+                                p =>
+                                `${escapeHtml(p.firstName)} ${escapeHtml(p.lastName)}<br>`
+                            ).join("")
+                            : "<span class='small'>Niemand</span>"
+                    }
+
+                    <p>
+                        <strong>
+                            🔴 Nein (${no.length})
+                        </strong>
+                    </p>
+
+                    ${
+                        no.length
+                            ? no.map(
+                                p =>
+                                `${escapeHtml(p.firstName)} ${escapeHtml(p.lastName)}<br>`
+                            ).join("")
+                            : "<span class='small'>Niemand</span>"
+                    }
 
                 </div>
             `;
-
         });
 
+    }
+    catch (error) {
+
+        console.error(error);
+
+        document
+            .getElementById("adminOverview")
+            .innerHTML =
+            "❌ Schichtübersicht konnte nicht geladen werden.";
+    }
 }
-async function loadAdminOverview(){
 
-    const response =
-        await fetch(SCRIPT_URL);
 
-    const data =
-        await response.json();
-
-    const container =
-        document.getElementById(
-            "adminOverview"
-        );
-
-    container.innerHTML = "";
-
-    shifts.forEach(shift => {
-
-        const yes =
-            data.filter(
-                d =>
-                d.shift === shift.label &&
-                d.status === "Ja"
-            );
-
-        const maybe =
-            data.filter(
-                d =>
-                d.shift === shift.label &&
-                d.status === "Vielleicht"
-            );
-
-        const no =
-            data.filter(
-                d =>
-                d.shift === shift.label &&
-                d.status === "Nein"
-            );
-
-        container.innerHTML += `
-
-        <div class="overview-card">
-
-            <h3>${shift.label}</h3>
-
-            <p>
-            <strong>
-            🟢 Ja (${yes.length})
-            </strong>
-            </p>
-
-            ${yes.map(
-                p =>
-                `${p.firstName} ${p.lastName}<br>`
-            ).join("")}
-
-            <p>
-            <strong>
-            🟡 Vielleicht (${maybe.length})
-            </strong>
-            </p>
-
-            ${maybe.map(
-                p =>
-                `${p.firstName} ${p.lastName}<br>`
-            ).join("")}
-
-            <p>
-            <strong>
-            🔴 Nein (${no.length})
-            </strong>
-            </p>
-
-            ${no.map(
-                p =>
-                `${p.firstName} ${p.lastName}<br>`
-            ).join("")}
-
-        </div>
-
-        `;
-
-    });
-
-}
+/* =========================================================
+   INITIALISIERUNG
+   ========================================================= */
 
 createShifts();
 
 document
-  .getElementById("shiftContainer")
-  .style.display = "none";
-  
-  document
+    .getElementById("shiftContainer")
+    .style.display = "none";
+
+document
     .getElementById("saveContainer")
     .style.display = "none";
 
 loadOverview();
-loadParticipantList();
+
+
+/*
+    Absichtlich keine Blur-Abfrage mehr:
+
+    checkPerson() lädt die vorhandenen Daten bereits
+    vollständig. Dadurch werden beim bloßen Verlassen
+    der Namensfelder keine unnötigen Serverabfragen
+    mehr ausgelöst.
+*/
 
 document
-  .getElementById("firstName")
-  .addEventListener("blur", loadExistingData);
+    .getElementById("adminPassword")
+    .addEventListener(
+        "keydown",
+        event => {
 
-document
-  .getElementById("lastName")
-  .addEventListener("blur", loadExistingData);
+            if (event.key === "Enter") {
+                loginAdmin();
+            }
+        }
+    );
 
 </script>
-
 
 </body>
 </html>
