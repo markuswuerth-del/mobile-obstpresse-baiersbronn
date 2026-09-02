@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -122,10 +123,69 @@ button:disabled {
 .overview-card {
     border: 1px solid #ddd;
     border-radius: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     padding: 12px;
     background: #fff;
 }
+
+/* =========================================================
+   KOMPAKTE ÖFFENTLICHE ÜBERSICHT
+   ========================================================= */
+
+.public-overview-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 12px;
+    background: #fff;
+}
+
+.public-date {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.public-time {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.public-counts {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.public-count {
+    flex: 1;
+    min-width: 90px;
+    text-align: center;
+    padding: 8px 5px;
+    border-radius: 7px;
+    font-weight: bold;
+}
+
+.public-count.yes-count {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.public-count.maybe-count {
+    background: #fff8e1;
+    color: #f57f17;
+}
+
+.public-count.no-count {
+    background: #ffebee;
+    color: #c62828;
+}
+
+
+/* =========================================================
+   ADMIN
+   ========================================================= */
 
 .admin-header {
     display: flex;
@@ -167,6 +227,146 @@ summary:hover {
     margin-bottom: 5px;
     margin-right: 5px;
 }
+
+
+/* =========================================================
+   ADMIN EINSATZPLANUNG
+   ========================================================= */
+
+.planning-card {
+    border: 1px solid #ddd;
+    border-radius: 9px;
+    padding: 14px;
+    margin-bottom: 12px;
+    background: #fff;
+}
+
+.planning-card.staffing-good {
+    border-left: 6px solid #2e7d32;
+}
+
+.planning-card.staffing-maybe {
+    border-left: 6px solid #f9a825;
+}
+
+.planning-card.staffing-low {
+    border-left: 6px solid #c62828;
+}
+
+.planning-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.planning-date {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.planning-time {
+    color: #666;
+    font-size: 14px;
+    margin-top: 3px;
+}
+
+.staffing-status {
+    font-weight: bold;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+.staffing-status.good {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.staffing-status.maybe {
+    background: #fff8e1;
+    color: #f57f17;
+}
+
+.staffing-status.low {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.planning-counts {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.planning-count {
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.planning-count.yes {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.planning-count.maybe {
+    background: #fff8e1;
+    color: #f57f17;
+}
+
+.planning-count.no {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.helper-names {
+    background: #f7f7f7;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.helper-names strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.helper-name {
+    display: inline-block;
+    margin-right: 8px;
+    margin-bottom: 4px;
+}
+
+.no-helper {
+    color: #c62828;
+    font-weight: bold;
+}
+
+.planning-filter {
+    margin-bottom: 12px;
+}
+
+.planning-filter label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.planning-filter input {
+    width: auto;
+    margin: 0;
+}
+
+
+/* =========================================================
+   SONSTIGES
+   ========================================================= */
 
 .success-message {
     display: none;
@@ -234,7 +434,19 @@ summary:hover {
     color: #666;
 }
 
+.loading {
+    text-align: center;
+    padding: 15px;
+    color: #666;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
 @media (max-width: 600px) {
+
     body {
         padding: 10px;
     }
@@ -255,155 +467,322 @@ summary:hover {
     .choice {
         width: 100%;
     }
+
+    .public-count {
+        min-width: 0;
+    }
+
+    .planning-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .staffing-status {
+        width: 100%;
+        text-align: center;
+    }
 }
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-    <div class="card header-card">
-        <h1>- Terminplanung 2026 -</h1>
-        <h1>🍎 Mobile Obstpresse Baiersbronn 🍎</h1>
+```
+<!-- =====================================================
+     KOPF
+     ===================================================== -->
 
-        <img
-            src="logo-baiersbronn.png"
-            alt="Gemeinde Baiersbronn"
-            class="logo"
-        >
+<div class="card header-card">
+
+    <h1>- Terminplanung 2026 -</h1>
+
+    <h1>
+        🍎 Mobile Obstpresse Baiersbronn 🍎
+    </h1>
+
+    <img
+        src="logo-baiersbronn.png"
+        alt="Gemeinde Baiersbronn"
+        class="logo"
+    >
+
+</div>
+
+
+<!-- =====================================================
+     HELFER-EINGABE
+     ===================================================== -->
+
+<div class="card">
+
+    <h2>Bitte Name und Vorname eintragen:</h2>
+
+    <div class="info-box">
+
+        <strong>Wichtiger Hinweis:</strong><br>
+
+        Die angegebenen Uhrzeiten dienen lediglich als grobe
+        Verfügbarkeitsabfrage. Die tatsächlichen Einsatzzeiten richten sich
+        nach den gebuchten Press-Terminen und können davon abweichen.
+
     </div>
 
-    <div class="card">
+    <input
+        id="firstName"
+        type="text"
+        placeholder="Vorname"
+        autocomplete="given-name"
+        autocapitalize="words"
+    >
 
-        <h2>Bitte Name und Vorname eintragen:</h2>
+    <input
+        id="lastName"
+        type="text"
+        placeholder="Nachname"
+        autocomplete="family-name"
+        autocapitalize="words"
+    >
 
-        <div class="info-box">
-            <strong>Wichtiger Hinweis:</strong><br>
-            Die angegebenen Uhrzeiten dienen lediglich als grobe
-            Verfügbarkeitsabfrage. Die tatsächlichen Einsatzzeiten richten sich
-            nach den gebuchten Press-Terminen und können davon abweichen.
+    <button onclick="checkPerson()">
+        Weiter
+    </button>
+
+    <div
+        id="personStatus"
+        class="status-message"
+    ></div>
+
+    <div
+        id="successMessage"
+        class="success-message"
+    ></div>
+
+    <div
+        id="progressWrap"
+        class="progress-wrap"
+    >
+
+        <div
+            id="progressText"
+            class="progress-text"
+        ></div>
+
+        <div class="progress-bar">
+
+            <div
+                id="progressFill"
+                class="progress-fill"
+            ></div>
+
         </div>
 
-        <input
-            id="firstName"
-            placeholder="Vorname"
-            autocomplete="given-name"
-        >
+    </div>
 
-        <input
-            id="lastName"
-            placeholder="Nachname"
-            autocomplete="family-name"
-        >
+    <div
+        id="shiftContainer"
+        style="display:none;"
+    ></div>
 
-        <button onclick="checkPerson()">
-            Weiter
+    <div
+        id="saveContainer"
+        style="display:none;"
+    >
+
+        <button onclick="saveData()">
+            Speichern
         </button>
-
-        <div id="personStatus" class="status-message"></div>
-
-        <div id="successMessage" class="success-message"></div>
-
-        <div id="progressWrap" class="progress-wrap">
-            <div id="progressText" class="progress-text"></div>
-            <div class="progress-bar">
-                <div id="progressFill" class="progress-fill"></div>
-            </div>
-        </div>
-
-        <div id="shiftContainer" style="display:none;"></div>
-
-        <div id="saveContainer" style="display:none;">
-            <button onclick="saveData()">
-                Speichern
-            </button>
-        </div>
-
-    </div>
-
-    <div class="card">
-
-        <div class="admin-header">
-            <h2>Wer kann wann?</h2>
-
-            <button onclick="showAdminLogin()">
-                🔒 Admin
-            </button>
-        </div>
-
-        <div
-            id="adminLogin"
-            class="admin-login"
-        >
-            <h3>Admin Anmeldung</h3>
-
-            <input
-                type="password"
-                id="adminPassword"
-                placeholder="Passwort"
-                autocomplete="current-password"
-            >
-
-            <button onclick="loginAdmin()">
-                Anmelden
-            </button>
-
-            <div id="adminLoginStatus" class="status-message"></div>
-        </div>
-
-        <div
-            id="adminPanel"
-            class="admin-panel"
-        >
-
-            <details>
-                <summary>📥 Exporte</summary>
-
-                <br>
-
-                <button
-                    class="export-button"
-                    onclick="exportAllCSV()"
-                >
-                    Gesamtexport
-                </button>
-
-                <div id="weekendExports"></div>
-            </details>
-
-            <details>
-                <summary>👥 Helferübersicht</summary>
-
-                <div id="helperOverview"></div>
-
-                <hr>
-
-                <h3>👤 Eingetragene Helfer</h3>
-
-                <div id="participantsList"></div>
-            </details>
-
-            <details>
-                <summary>📋 Verfügbarkeiten je Schicht</summary>
-
-                <div id="adminOverview"></div>
-            </details>
-
-        </div>
-
-        <div id="overview">
-            Lade Daten...
-        </div>
 
     </div>
 
 </div>
 
+
+<!-- =====================================================
+     ÜBERSICHT
+     ===================================================== -->
+
+<div class="card">
+
+    <div class="admin-header">
+
+        <h2>Wer kann wann?</h2>
+
+        <button onclick="showAdminLogin()">
+            🔒 Admin
+        </button>
+
+    </div>
+
+
+    <!-- =================================================
+         ADMIN LOGIN
+         ================================================= -->
+
+    <div
+        id="adminLogin"
+        class="admin-login"
+    >
+
+        <h3>Admin Anmeldung</h3>
+
+        <input
+            type="password"
+            id="adminPassword"
+            placeholder="Passwort"
+            autocomplete="current-password"
+        >
+
+        <button onclick="loginAdmin()">
+            Anmelden
+        </button>
+
+        <div
+            id="adminLoginStatus"
+            class="status-message"
+        ></div>
+
+    </div>
+
+
+    <!-- =================================================
+         ADMIN PANEL
+         ================================================= -->
+
+    <div
+        id="adminPanel"
+        class="admin-panel"
+    >
+
+        <!-- =============================================
+             NEUE EINSATZPLANUNG
+             ============================================= -->
+
+        <details>
+
+            <summary>
+                📅 Einsatzplanung
+            </summary>
+
+            <div class="planning-filter">
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        id="onlyProblemShifts"
+                        onchange="loadAdminPlanning()"
+                    >
+
+                    Nur Schichten mit weniger als 3 Helfern anzeigen
+
+                </label>
+
+            </div>
+
+            <div id="adminPlanning">
+
+                <div class="loading">
+                    ⏳ Einsatzplanung wird geladen...
+                </div>
+
+            </div>
+
+        </details>
+
+
+        <!-- =============================================
+             EXPORTE
+             ============================================= -->
+
+        <details>
+
+            <summary>
+                📥 Exporte
+            </summary>
+
+            <br>
+
+            <button
+                class="export-button"
+                onclick="exportAllCSV()"
+            >
+                Gesamtexport
+            </button>
+
+            <div id="weekendExports"></div>
+
+        </details>
+
+
+        <!-- =============================================
+             HELFERÜBERSICHT
+             ============================================= -->
+
+        <details>
+
+            <summary>
+                👥 Helferübersicht
+            </summary>
+
+            <div id="helperOverview"></div>
+
+            <hr>
+
+            <h3>
+                👤 Eingetragene Helfer
+            </h3>
+
+            <div id="participantsList"></div>
+
+        </details>
+
+
+        <!-- =============================================
+             DETAIL-ÜBERSICHT
+             ============================================= -->
+
+        <details>
+
+            <summary>
+                📋 Verfügbarkeiten je Schicht
+            </summary>
+
+            <div id="adminOverview"></div>
+
+        </details>
+
+    </div>
+
+
+    <!-- =================================================
+         ÖFFENTLICHE ÜBERSICHT
+         ================================================= -->
+
+    <div id="overview">
+
+        <div class="loading">
+            ⏳ Verfügbarkeiten werden geladen...
+        </div>
+
+    </div>
+
+</div>
+```
+
+</div>
+
 <script>
+
+/* =========================================================
+   KONFIGURATION
+   ========================================================= */
 
 const SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbyx0Nu-qokdbEti73VTUS0C9HMv_FaIT93J2F9Xb1bdiowNlt5eiz-VAbCd6aohJjcq/exec";
+
 
 const shifts = [];
 
@@ -416,6 +795,7 @@ let isAdminLoggedIn = false;
    ========================================================= */
 
 function escapeHtml(value) {
+
     return String(value ?? "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
@@ -427,16 +807,23 @@ function escapeHtml(value) {
 
 function setProgress(current, total) {
 
-    const wrap = document.getElementById("progressWrap");
-    const text = document.getElementById("progressText");
-    const fill = document.getElementById("progressFill");
+    const wrap =
+        document.getElementById("progressWrap");
+
+    const text =
+        document.getElementById("progressText");
+
+    const fill =
+        document.getElementById("progressFill");
 
     if (!wrap || !text || !fill) {
         return;
     }
 
     if (total <= 0) {
+
         wrap.style.display = "none";
+
         return;
     }
 
@@ -445,16 +832,18 @@ function setProgress(current, total) {
     const percent =
         Math.round((current / total) * 100);
 
-    fill.style.width = percent + "%";
+    fill.style.width =
+        percent + "%";
 
     text.innerText =
-        `Beantwortete Termine: ${current} von ${total}`;
+        `Beantwortete Termine: ${current} von ${total} (${percent} %)`;
 }
 
 
 function hideProgress() {
 
-    const wrap = document.getElementById("progressWrap");
+    const wrap =
+        document.getElementById("progressWrap");
 
     if (wrap) {
         wrap.style.display = "none";
@@ -465,14 +854,19 @@ function hideProgress() {
 async function fetchData() {
 
     const response =
-        await fetch(SCRIPT_URL, {
-            method: "GET",
-            cache: "no-store"
-        });
+        await fetch(
+            SCRIPT_URL,
+            {
+                method: "GET",
+                cache: "no-store"
+            }
+        );
 
     if (!response.ok) {
+
         throw new Error(
-            "Server antwortete mit HTTP " + response.status
+            "Server antwortete mit HTTP " +
+            response.status
         );
     }
 
@@ -480,7 +874,10 @@ async function fetchData() {
         await response.json();
 
     if (!Array.isArray(data)) {
-        throw new Error("Ungültige Serverantwort");
+
+        throw new Error(
+            "Ungültige Serverantwort"
+        );
     }
 
     return data;
@@ -489,13 +886,15 @@ async function fetchData() {
 
 function csvEscape(value) {
 
-    const text = String(value ?? "");
+    const text =
+        String(value ?? "");
 
     if (
         text.includes(";") ||
         text.includes('"') ||
         text.includes("\n")
     ) {
+
         return '"' +
             text.replace(/"/g, '""') +
             '"';
@@ -531,32 +930,68 @@ function createShifts() {
         const date =
             d.toLocaleDateString("de-DE");
 
+
+        /*
+            03.10.2026 wird ausgelassen.
+        */
+
+        if (date === "3.10.2026") {
+            continue;
+        }
+
+
+        /*
+            Freitag
+        */
+
         if (weekday === 5) {
 
             shifts.push({
+
                 id: date + "-fr",
+
                 label:
                     date +
                     " (Freitag) 13:00 - 19:00"
+
             });
+
         }
+
+
+        /*
+            Samstag
+        */
 
         if (weekday === 6) {
 
             shifts.push({
-                id: date + "-sa1",
+
+                id:
+                    date +
+                    "-sa1",
+
                 label:
                     date +
                     " (Samstag) 07:00 - 12:00"
+
             });
 
+
             shifts.push({
-                id: date + "-sa2",
+
+                id:
+                    date +
+                    "-sa2",
+
                 label:
                     date +
                     " (Samstag) 12:00 - 19:00"
+
             });
+
         }
+
     }
 
     renderShifts();
@@ -570,56 +1005,79 @@ function createShifts() {
 function renderShifts() {
 
     const container =
-        document.getElementById("shiftContainer");
+        document.getElementById(
+            "shiftContainer"
+        );
 
     container.innerHTML = "";
 
     shifts.forEach((shift) => {
 
         container.innerHTML += `
+
             <div class="shift">
-                <strong>${escapeHtml(shift.label)}</strong>
+
+                <strong>
+                    ${escapeHtml(shift.label)}
+                </strong>
 
                 <div class="radio-group">
 
                     <label class="choice yes">
+
                         <input
                             type="radio"
                             name="${escapeHtml(shift.id)}"
                             value="Ja"
                             onchange="updateProgress()"
                         >
+
                         🟢 Ja
+
                     </label>
 
+
                     <label class="choice maybe">
+
                         <input
                             type="radio"
                             name="${escapeHtml(shift.id)}"
                             value="Vielleicht"
                             onchange="updateProgress()"
                         >
+
                         🟡 Vielleicht
+
                     </label>
 
+
                     <label class="choice no">
+
                         <input
                             type="radio"
                             name="${escapeHtml(shift.id)}"
                             value="Nein"
                             onchange="updateProgress()"
                         >
+
                         🔴 Nein
+
                     </label>
 
                 </div>
+
             </div>
+
         `;
     });
 
     updateProgress();
 }
 
+
+/* =========================================================
+   FORTSCHRITT
+   ========================================================= */
 
 function updateProgress() {
 
@@ -635,6 +1093,7 @@ function updateProgress() {
         if (selected) {
             answered++;
         }
+
     });
 
     setProgress(
@@ -662,7 +1121,10 @@ async function saveData() {
         );
 
     saveButton.disabled = true;
-    saveButton.innerText = "Speichere...";
+
+    saveButton.innerText =
+        "Speichere...";
+
 
     try {
 
@@ -678,6 +1140,7 @@ async function saveData() {
                 .value
                 .trim();
 
+
         if (!firstName || !lastName) {
 
             alert(
@@ -687,8 +1150,11 @@ async function saveData() {
             return;
         }
 
+
         const missingShifts = [];
+
         const entries = [];
+
 
         for (const shift of shifts) {
 
@@ -696,6 +1162,7 @@ async function saveData() {
                 document.querySelector(
                     `input[name="${CSS.escape(shift.id)}"]:checked`
                 );
+
 
             if (!selected) {
 
@@ -706,11 +1173,19 @@ async function saveData() {
                 continue;
             }
 
+
             entries.push({
-                shift: shift.label,
-                status: selected.value
+
+                shift:
+                    shift.label,
+
+                status:
+                    selected.value
+
             });
+
         }
+
 
         if (missingShifts.length > 0) {
 
@@ -721,10 +1196,13 @@ async function saveData() {
                     "\n\nTrotzdem speichern?"
                 );
 
+
             if (!proceed) {
                 return;
             }
+
         }
+
 
         if (entries.length === 0) {
 
@@ -736,28 +1214,38 @@ async function saveData() {
             return;
         }
 
+
         const response =
             await fetch(
                 SCRIPT_URL,
                 {
                     method: "POST",
-                    body: JSON.stringify({
-                        firstName,
-                        lastName,
-                        entries
-                    })
+
+                    body:
+                        JSON.stringify({
+
+                            firstName,
+                            lastName,
+                            entries
+
+                        })
                 }
             );
 
+
         if (!response.ok) {
+
             throw new Error(
                 "Server antwortete mit HTTP " +
                 response.status
             );
+
         }
+
 
         const result =
             await response.json();
+
 
         if (result.success) {
 
@@ -770,9 +1258,12 @@ async function saveData() {
                 "<br><br>" +
                 "Wir wünschen dir bereits jetzt frohes Mosten! 🚜";
 
+
             document
                 .getElementById("successMessage")
-                .style.display = "block";
+                .style.display =
+                "block";
+
 
             document
                 .getElementById("successMessage")
@@ -781,52 +1272,80 @@ async function saveData() {
                     block: "center"
                 });
 
+
             setTimeout(() => {
 
                 document
                     .getElementById("successMessage")
-                    .style.display = "none";
+                    .style.display =
+                    "none";
 
             }, 8000);
+
 
             document
                 .getElementById("firstName")
                 .value = "";
 
+
             document
                 .getElementById("lastName")
                 .value = "";
 
+
             document
                 .getElementById("shiftContainer")
-                .style.display = "none";
+                .style.display =
+                "none";
+
 
             document
                 .getElementById("saveContainer")
-                .style.display = "none";
+                .style.display =
+                "none";
+
 
             document
                 .getElementById("personStatus")
-                .innerHTML = "";
+                .innerHTML =
+                "";
+
 
             hideProgress();
 
+
+            /*
+                Öffentliche Übersicht aktualisieren.
+            */
+
             loadOverview();
 
-if(isAdminLoggedIn){
 
-    loadHelperOverview();
-    loadParticipantList();
-    loadAdminOverview();
+            /*
+                Admin-Ansichten ebenfalls aktualisieren.
+            */
 
-}
+            if (isAdminLoggedIn) {
 
-        } else {
+                loadHelperOverview();
+
+                loadParticipantList();
+
+                loadAdminOverview();
+
+                loadAdminPlanning();
+
+            }
+
+
+        }
+        else {
 
             document
                 .getElementById("personStatus")
                 .innerHTML =
                 "❌ Fehler beim Speichern.";
+
         }
 
     }
@@ -845,7 +1364,10 @@ if(isAdminLoggedIn){
         isSaving = false;
 
         saveButton.disabled = false;
-        saveButton.innerText = "Speichern";
+
+        saveButton.innerText =
+            "Speichern";
+
     }
 }
 
@@ -861,8 +1383,10 @@ async function exportAllCSV() {
         const data =
             await fetchData();
 
+
         let csv =
             "Vorname;Nachname;Schicht;Status\n";
+
 
         data.forEach(row => {
 
@@ -872,7 +1396,9 @@ async function exportAllCSV() {
                 csvEscape(row.shift) + ";" +
                 csvEscape(row.status) +
                 "\n";
+
         });
+
 
         downloadCSV(
             csv,
@@ -887,6 +1413,7 @@ async function exportAllCSV() {
         alert(
             "❌ Der Gesamtexport konnte nicht geladen werden."
         );
+
     }
 }
 
@@ -901,46 +1428,62 @@ async function loadParticipantList() {
         return;
     }
 
+
     try {
 
         const data =
             await fetchData();
+
 
         const participants =
             document.getElementById(
                 "participantsList"
             );
 
+
         participants.innerHTML = "";
+
 
         const uniqueNames =
             new Set();
 
+
         data.forEach(entry => {
 
             const first =
-                String(entry.firstName ?? "").trim();
+                String(
+                    entry.firstName ?? ""
+                ).trim();
+
 
             const last =
-                String(entry.lastName ?? "").trim();
+                String(
+                    entry.lastName ?? ""
+                ).trim();
+
 
             if (!first && !last) {
                 return;
             }
 
+
             uniqueNames.add(
                 `${first} ${last}`.trim()
             );
+
         });
+
 
         const names =
             Array.from(uniqueNames)
-                .sort((a, b) =>
-                    a.localeCompare(
-                        b,
-                        "de"
-                    )
+                .sort(
+                    (a, b) =>
+                        a.localeCompare(
+                            b,
+                            "de"
+                        )
                 );
+
 
         if (names.length === 0) {
 
@@ -950,16 +1493,24 @@ async function loadParticipantList() {
             return;
         }
 
+
         names.forEach(name => {
 
             participants.innerHTML += `
-                <div style="
-                    padding:8px;
-                    border-bottom:1px solid #ddd;
-                ">
+
+                <div
+                    style="
+                        padding:8px;
+                        border-bottom:1px solid #ddd;
+                    "
+                >
+
                     ${escapeHtml(name)}
+
                 </div>
+
             `;
+
         });
 
     }
@@ -971,12 +1522,13 @@ async function loadParticipantList() {
             .getElementById("participantsList")
             .innerHTML =
             "❌ Helferliste konnte nicht geladen werden.";
+
     }
 }
 
 
 /* =========================================================
-   PERSON PRÜFEN / VORHANDENE DATEN LADEN
+   PERSON PRÜFEN
    ========================================================= */
 
 async function checkPerson() {
@@ -987,11 +1539,13 @@ async function checkPerson() {
             .value
             .trim();
 
+
     const lastName =
         document
             .getElementById("lastName")
             .value
             .trim();
+
 
     if (!firstName || !lastName) {
 
@@ -1002,42 +1556,56 @@ async function checkPerson() {
         return;
     }
 
+
     const status =
         document.getElementById(
             "personStatus"
         );
 
+
     status.innerHTML =
         "⏳ Daten werden geprüft...";
+
 
     try {
 
         const data =
             await fetchData();
 
+
         const personEntries =
             data.filter(entry =>
 
-                String(entry.firstName ?? "")
+                String(
+                    entry.firstName ?? ""
+                )
                     .trim()
                     .toLowerCase() ===
                 firstName.toLowerCase()
 
                 &&
 
-                String(entry.lastName ?? "")
+                String(
+                    entry.lastName ?? ""
+                )
                     .trim()
                     .toLowerCase() ===
                 lastName.toLowerCase()
+
             );
+
 
         document
             .getElementById("shiftContainer")
-            .style.display = "block";
+            .style.display =
+            "block";
+
 
         document
             .getElementById("saveContainer")
-            .style.display = "block";
+            .style.display =
+            "block";
+
 
         if (personEntries.length === 0) {
 
@@ -1049,31 +1617,41 @@ async function checkPerson() {
             return;
         }
 
+
         status.innerHTML =
-            "✅ Vorhandene Daten gefunden";
+            "🔄 Deine bisherigen Daten wurden geladen. Du kannst sie ändern.";
+
 
         renderShifts();
+
 
         personEntries.forEach(entry => {
 
             const shift =
                 shifts.find(
-                    s => s.label === entry.shift
+                    s =>
+                        s.label ===
+                        entry.shift
                 );
+
 
             if (!shift) {
                 return;
             }
+
 
             const radio =
                 document.querySelector(
                     `input[name="${CSS.escape(shift.id)}"][value="${CSS.escape(entry.status)}"]`
                 );
 
+
             if (radio) {
                 radio.checked = true;
             }
+
         });
+
 
         updateProgress();
 
@@ -1084,6 +1662,7 @@ async function checkPerson() {
 
         status.innerHTML =
             "❌ Daten konnten nicht geladen werden.";
+
     }
 }
 
@@ -1099,57 +1678,119 @@ async function loadOverview() {
         const data =
             await fetchData();
 
+
         const overview =
             document.getElementById(
                 "overview"
             );
 
+
         overview.innerHTML = "";
+
 
         shifts.forEach(shift => {
 
             const yes =
                 data.filter(
                     d =>
-                    d.shift === shift.label &&
-                    d.status === "Ja"
+                        d.shift === shift.label &&
+                        d.status === "Ja"
                 );
+
 
             const maybe =
                 data.filter(
                     d =>
-                    d.shift === shift.label &&
-                    d.status === "Vielleicht"
+                        d.shift === shift.label &&
+                        d.status === "Vielleicht"
                 );
+
 
             const no =
                 data.filter(
                     d =>
-                    d.shift === shift.label &&
-                    d.status === "Nein"
+                        d.shift === shift.label &&
+                        d.status === "Nein"
                 );
 
+
+            /*
+                Datum und Uhrzeit aus dem
+                Schichtlabel herauslösen.
+            */
+
+            const match =
+                shift.label.match(
+                    /^(.+?) \((.+?)\) (.+)$/
+                );
+
+
+            let datePart =
+                shift.label;
+
+            let timePart =
+                "";
+
+
+            if (match) {
+
+                datePart =
+                    `${match[1]} (${match[2]})`;
+
+                timePart =
+                    match[3];
+
+            }
+
+
             overview.innerHTML += `
-                <div class="overview-card">
 
-                    <h3>
-                        ${escapeHtml(shift.label)}
-                    </h3>
+                <div class="public-overview-card">
 
-                    <p>
-                        🟢 Ja (${yes.length})
-                    </p>
+                    <div class="public-date">
 
-                    <p>
-                        🟡 Vielleicht (${maybe.length})
-                    </p>
+                        ${escapeHtml(datePart)}
 
-                    <p>
-                        🔴 Nein (${no.length})
-                    </p>
+                    </div>
+
+                    <div class="public-time">
+
+                        🕐 ${escapeHtml(timePart)}
+
+                    </div>
+
+
+                    <div class="public-counts">
+
+                        <div class="public-count yes-count">
+
+                            🟢 Ja<br>
+                            ${yes.length}
+
+                        </div>
+
+
+                        <div class="public-count maybe-count">
+
+                            🟡 Vielleicht<br>
+                            ${maybe.length}
+
+                        </div>
+
+
+                        <div class="public-count no-count">
+
+                            🔴 Nein<br>
+                            ${no.length}
+
+                        </div>
+
+                    </div>
 
                 </div>
+
             `;
+
         });
 
     }
@@ -1161,6 +1802,7 @@ async function loadOverview() {
             .getElementById("overview")
             .innerHTML =
             "❌ Fehler beim Laden der Übersicht.";
+
     }
 }
 
@@ -1176,38 +1818,62 @@ function showAdminLogin() {
             "adminPanel"
         );
 
+
     const adminLogin =
         document.getElementById(
             "adminLogin"
         );
 
-    if (adminPanel.style.display === "block") {
 
-        adminPanel.style.display = "none";
-        adminLogin.style.display = "none";
+    if (
+        adminPanel.style.display ===
+        "block"
+    ) {
 
-        isAdminLoggedIn = false;
+        adminPanel.style.display =
+            "none";
+
+
+        adminLogin.style.display =
+            "none";
+
+
+        isAdminLoggedIn =
+            false;
+
 
         document
             .getElementById("adminPassword")
             .value = "";
 
+
         document
             .getElementById("adminLoginStatus")
             .innerHTML = "";
 
-        alert("Admin abgemeldet");
+
+        alert(
+            "Admin abgemeldet"
+        );
+
 
         return;
     }
 
-    adminLogin.style.display = "block";
+
+    adminLogin.style.display =
+        "block";
+
 
     document
         .getElementById("adminPassword")
         .focus();
 }
 
+
+/* =========================================================
+   ADMIN LOGIN AUSFÜHREN
+   ========================================================= */
 
 async function loginAdmin() {
 
@@ -1216,10 +1882,12 @@ async function loginAdmin() {
             .getElementById("adminPassword")
             .value;
 
+
     const loginStatus =
         document.getElementById(
             "adminLoginStatus"
         );
+
 
     if (!password) {
 
@@ -1229,8 +1897,10 @@ async function loginAdmin() {
         return;
     }
 
+
     loginStatus.innerHTML =
         "⏳ Anmeldung wird geprüft...";
+
 
     try {
 
@@ -1239,22 +1909,34 @@ async function loginAdmin() {
                 SCRIPT_URL,
                 {
                     method: "POST",
-                    body: JSON.stringify({
-                        action: "adminLogin",
-                        password: password
-                    })
+
+                    body:
+                        JSON.stringify({
+
+                            action:
+                                "adminLogin",
+
+                            password:
+                                password
+
+                        })
                 }
             );
 
+
         if (!response.ok) {
+
             throw new Error(
                 "Server antwortete mit HTTP " +
                 response.status
             );
+
         }
+
 
         const result =
             await response.json();
+
 
         if (!result.success) {
 
@@ -1264,26 +1946,63 @@ async function loginAdmin() {
             return;
         }
 
-        isAdminLoggedIn = true;
+
+        isAdminLoggedIn =
+            true;
+
 
         document
             .getElementById("adminLogin")
-            .style.display = "none";
+            .style.display =
+            "none";
+
 
         document
             .getElementById("adminPanel")
-            .style.display = "block";
+            .style.display =
+            "block";
+
 
         document
             .getElementById("adminPassword")
             .value = "";
 
+
         loginStatus.innerHTML = "";
 
+
         createWeekendButtons();
+
         loadHelperOverview();
+
         loadParticipantList();
+
         loadAdminOverview();
+
+        loadAdminPlanning();
+
+
+        /*
+            Direkt zur Einsatzplanung scrollen.
+        */
+
+        setTimeout(() => {
+
+            const planning =
+                document.getElementById(
+                    "adminPlanning"
+                );
+
+            if (planning) {
+
+                planning.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+
+        }, 100);
 
     }
     catch (error) {
@@ -1292,6 +2011,7 @@ async function loginAdmin() {
 
         loginStatus.innerHTML =
             "❌ Anmeldung momentan nicht möglich.";
+
     }
 }
 
@@ -1300,32 +2020,54 @@ async function loginAdmin() {
    CSV DOWNLOAD
    ========================================================= */
 
-function downloadCSV(content, fileName) {
+function downloadCSV(
+    content,
+    fileName
+) {
 
     const blob =
         new Blob(
             ["\ufeff" + content],
             {
-                type: "text/csv;charset=utf-8;"
+                type:
+                    "text/csv;charset=utf-8;"
             }
         );
+
 
     const link =
         document.createElement("a");
 
+
     const url =
         URL.createObjectURL(blob);
 
-    link.href = url;
-    link.download = fileName;
 
-    document.body.appendChild(link);
+    link.href =
+        url;
+
+
+    link.download =
+        fileName;
+
+
+    document
+        .body
+        .appendChild(link);
+
+
     link.click();
+
+
     link.remove();
 
+
     setTimeout(() => {
+
         URL.revokeObjectURL(url);
+
     }, 1000);
+
 }
 
 
@@ -1340,61 +2082,92 @@ function createWeekendButtons() {
             "weekendExports"
         );
 
+
     container.innerHTML = "";
+
 
     shifts.forEach(shift => {
 
         const btn =
-            document.createElement("button");
+            document.createElement(
+                "button"
+            );
+
 
         btn.className =
             "export-button";
 
+
         btn.innerText =
-            "📥 " + shift.label;
+            "📥 " +
+            shift.label;
+
 
         btn.onclick =
-            () => exportWeekend(
-                shift.label
-            );
+            () =>
+                exportWeekend(
+                    shift.label
+                );
+
 
         container.appendChild(btn);
+
+
         container.appendChild(
             document.createElement("br")
         );
+
     });
+
 }
 
 
-async function exportWeekend(shiftName) {
+async function exportWeekend(
+    shiftName
+) {
 
     try {
 
         const data =
             await fetchData();
 
+
         const filtered =
             data.filter(
                 d =>
-                d.shift === shiftName
+                    d.shift ===
+                    shiftName
             );
+
 
         let csv =
             "Vorname;Nachname;Status\n";
 
+
         filtered.forEach(row => {
 
             csv +=
-                csvEscape(row.firstName) + ";" +
-                csvEscape(row.lastName) + ";" +
+                csvEscape(row.firstName) +
+                ";" +
+                csvEscape(row.lastName) +
+                ";" +
                 csvEscape(row.status) +
                 "\n";
+
         });
+
 
         const safeFileName =
             shiftName
-                .replace(/[^\wÄÖÜäöüß -]/g, "")
-                .replace(/\s+/g, "_");
+                .replace(
+                    /[^\wÄÖÜäöüß -]/g,
+                    ""
+                )
+                .replace(
+                    /\s+/g,
+                    "_"
+                );
+
 
         downloadCSV(
             csv,
@@ -1409,6 +2182,7 @@ async function exportWeekend(shiftName) {
         alert(
             "❌ Der Export für diese Schicht konnte nicht geladen werden."
         );
+
     }
 }
 
@@ -1423,65 +2197,105 @@ async function loadHelperOverview() {
         return;
     }
 
+
     try {
 
         const data =
             await fetchData();
+
 
         const container =
             document.getElementById(
                 "helperOverview"
             );
 
+
         container.innerHTML = "";
 
+
         const helpers = {};
+
 
         data.forEach(entry => {
 
             const first =
-                String(entry.firstName ?? "").trim();
+                String(
+                    entry.firstName ?? ""
+                ).trim();
+
 
             const last =
-                String(entry.lastName ?? "").trim();
+                String(
+                    entry.lastName ?? ""
+                ).trim();
+
 
             const name =
                 `${first} ${last}`.trim();
+
 
             if (!name) {
                 return;
             }
 
+
             if (!helpers[name]) {
 
                 helpers[name] = {
+
                     ja: 0,
+
                     vielleicht: 0,
+
                     nein: 0
+
                 };
+
             }
 
-            if (entry.status === "Ja") {
+
+            if (
+                entry.status ===
+                "Ja"
+            ) {
+
                 helpers[name].ja++;
+
             }
 
-            if (entry.status === "Vielleicht") {
+
+            if (
+                entry.status ===
+                "Vielleicht"
+            ) {
+
                 helpers[name].vielleicht++;
+
             }
 
-            if (entry.status === "Nein") {
+
+            if (
+                entry.status ===
+                "Nein"
+            ) {
+
                 helpers[name].nein++;
+
             }
+
         });
+
 
         const names =
             Object.keys(helpers)
-                .sort((a, b) =>
-                    a.localeCompare(
-                        b,
-                        "de"
-                    )
+                .sort(
+                    (a, b) =>
+                        a.localeCompare(
+                            b,
+                            "de"
+                        )
                 );
+
 
         if (names.length === 0) {
 
@@ -1491,15 +2305,19 @@ async function loadHelperOverview() {
             return;
         }
 
+
         names.forEach(name => {
 
             const h =
                 helpers[name];
 
+
             container.innerHTML += `
+
                 <div
                     class="overview-card"
                 >
+
                     <strong>
                         ${escapeHtml(name)}
                     </strong>
@@ -1510,13 +2328,18 @@ async function loadHelperOverview() {
 
                     <br>
 
-                    🟡 Vielleicht: ${h.vielleicht}
+                    🟡 Vielleicht:
+                    ${h.vielleicht}
 
                     <br>
 
-                    🔴 Nein: ${h.nein}
+                    🔴 Nein:
+                    ${h.nein}
+
                 </div>
+
             `;
+
         });
 
     }
@@ -1525,9 +2348,12 @@ async function loadHelperOverview() {
         console.error(error);
 
         document
-            .getElementById("helperOverview")
+            .getElementById(
+                "helperOverview"
+            )
             .innerHTML =
             "❌ Helferübersicht konnte nicht geladen werden.";
+
     }
 }
 
@@ -1542,52 +2368,68 @@ async function loadAdminOverview() {
         return;
     }
 
+
     try {
 
         const data =
             await fetchData();
+
 
         const container =
             document.getElementById(
                 "adminOverview"
             );
 
+
         container.innerHTML = "";
+
 
         shifts.forEach(shift => {
 
             const yes =
                 data.filter(
                     d =>
-                    d.shift === shift.label &&
-                    d.status === "Ja"
+                        d.shift === shift.label &&
+                        d.status === "Ja"
                 );
+
 
             const maybe =
                 data.filter(
                     d =>
-                    d.shift === shift.label &&
-                    d.status === "Vielleicht"
+                        d.shift === shift.label &&
+                        d.status === "Vielleicht"
                 );
+
 
             const no =
                 data.filter(
                     d =>
-                    d.shift === shift.label &&
-                    d.status === "Nein"
+                        d.shift === shift.label &&
+                        d.status === "Nein"
                 );
+
 
             let staffingClass =
                 "staffing-low";
 
+
             if (yes.length >= 3) {
-                staffingClass = "staffing-good";
+
+                staffingClass =
+                    "staffing-good";
+
             }
             else if (yes.length >= 1) {
-                staffingClass = "staffing-maybe";
+
+                staffingClass =
+                    "staffing-maybe";
+
             }
 
+
             container.innerHTML += `
+
                 <div
                     class="overview-card ${staffingClass}"
                 >
@@ -1596,11 +2438,15 @@ async function loadAdminOverview() {
                         ${escapeHtml(shift.label)}
                     </h3>
 
+
                     <p>
+
                         <strong>
                             🟢 Ja (${yes.length})
                         </strong>
+
                     </p>
+
 
                     ${
                         yes.length
@@ -1611,11 +2457,15 @@ async function loadAdminOverview() {
                             : "<span class='small'>Niemand</span>"
                     }
 
+
                     <p>
+
                         <strong>
                             🟡 Vielleicht (${maybe.length})
                         </strong>
+
                     </p>
+
 
                     ${
                         maybe.length
@@ -1626,11 +2476,15 @@ async function loadAdminOverview() {
                             : "<span class='small'>Niemand</span>"
                     }
 
+
                     <p>
+
                         <strong>
                             🔴 Nein (${no.length})
                         </strong>
+
                     </p>
+
 
                     ${
                         no.length
@@ -1642,7 +2496,9 @@ async function loadAdminOverview() {
                     }
 
                 </div>
+
             `;
+
         });
 
     }
@@ -1651,9 +2507,302 @@ async function loadAdminOverview() {
         console.error(error);
 
         document
-            .getElementById("adminOverview")
+            .getElementById(
+                "adminOverview"
+            )
             .innerHTML =
             "❌ Schichtübersicht konnte nicht geladen werden.";
+
+    }
+}
+
+
+/* =========================================================
+   NEUE ADMIN-EINSATZPLANUNG
+   ========================================================= */
+
+async function loadAdminPlanning() {
+
+    if (!isAdminLoggedIn) {
+        return;
+    }
+
+
+    const container =
+        document.getElementById(
+            "adminPlanning"
+        );
+
+
+    container.innerHTML =
+        `
+        <div class="loading">
+            ⏳ Einsatzplanung wird geladen...
+        </div>
+        `;
+
+
+    try {
+
+        const data =
+            await fetchData();
+
+
+        const onlyProblemShifts =
+            document.getElementById(
+                "onlyProblemShifts"
+            ).checked;
+
+
+        container.innerHTML = "";
+
+
+        let displayedShifts = 0;
+
+
+        shifts.forEach(shift => {
+
+            const yes =
+                data.filter(
+                    d =>
+                        d.shift === shift.label &&
+                        d.status === "Ja"
+                );
+
+
+            const maybe =
+                data.filter(
+                    d =>
+                        d.shift === shift.label &&
+                        d.status === "Vielleicht"
+                );
+
+
+            const no =
+                data.filter(
+                    d =>
+                        d.shift === shift.label &&
+                        d.status === "Nein"
+                );
+
+
+            /*
+                Filter:
+                Nur Schichten mit weniger
+                als 3 sicheren Helfern.
+            */
+
+            if (
+                onlyProblemShifts &&
+                yes.length >= 3
+            ) {
+                return;
+            }
+
+
+            displayedShifts++;
+
+
+            let staffingClass =
+                "low";
+
+
+            let staffingText =
+                "🔴 Helfer gesucht";
+
+
+            if (yes.length >= 5) {
+
+                staffingClass =
+                    "good";
+
+                staffingText =
+                    "🟢 Gut besetzt";
+
+            }
+            else if (yes.length >= 4) {
+
+                staffingClass =
+                    "maybe";
+
+                staffingText =
+                    "🟡 Noch knapp";
+
+            }
+
+
+            /*
+                Datum und Uhrzeit aus dem
+                Schichtlabel herauslösen.
+            */
+
+            const match =
+                shift.label.match(
+                    /^(.+?) \((.+?)\) (.+)$/
+                );
+
+
+            let datePart =
+                shift.label;
+
+            let timePart =
+                "";
+
+
+            if (match) {
+
+                datePart =
+                    `${match[1]} (${match[2]})`;
+
+                timePart =
+                    match[3];
+
+            }
+
+
+            /*
+                Namen der sicheren Helfer.
+            */
+
+            let helperHtml = "";
+
+
+            if (yes.length > 0) {
+
+                helperHtml =
+                    yes.map(
+                        person =>
+                            `
+                            <span class="helper-name">
+                                ${escapeHtml(person.firstName)}
+                                ${escapeHtml(person.lastName)}
+                            </span>
+                            `
+                    ).join("");
+
+            }
+            else {
+
+                helperHtml =
+                    `
+                    <span class="no-helper">
+                        ❗ Noch kein sicherer Helfer eingetragen
+                    </span>
+                    `;
+
+            }
+
+
+            container.innerHTML += `
+
+                <div
+                    class="planning-card staffing-${staffingClass}"
+                >
+
+                    <div class="planning-header">
+
+                        <div>
+
+                            <div class="planning-date">
+
+                                ${escapeHtml(datePart)}
+
+                            </div>
+
+                            <div class="planning-time">
+
+                                🕐 ${escapeHtml(timePart)}
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="staffing-status ${staffingClass}"
+                        >
+
+                            ${staffingText}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="planning-counts">
+
+                        <div class="planning-count yes">
+
+                            🟢 Ja:
+                            ${yes.length}
+
+                        </div>
+
+
+                        <div class="planning-count maybe">
+
+                            🟡 Vielleicht:
+                            ${maybe.length}
+
+                        </div>
+
+
+                        <div class="planning-count no">
+
+                            🔴 Nein:
+                            ${no.length}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="helper-names">
+
+                        <strong>
+                            👥 Sichere Helfer:
+                        </strong>
+
+                        ${helperHtml}
+
+                    </div>
+
+                </div>
+
+            `;
+
+        });
+
+
+        if (displayedShifts === 0) {
+
+            container.innerHTML = `
+
+                <div class="info-box">
+
+                    ✅ Alle Schichten haben mindestens
+                    3 sichere Helfer.
+
+                </div>
+
+            `;
+
+        }
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+        container.innerHTML =
+            `
+            <div class="status-message">
+
+                ❌ Einsatzplanung konnte nicht geladen werden.
+
+            </div>
+            `;
+
     }
 }
 
@@ -1664,25 +2813,67 @@ async function loadAdminOverview() {
 
 createShifts();
 
+
 document
     .getElementById("shiftContainer")
-    .style.display = "none";
+    .style.display =
+    "none";
+
 
 document
     .getElementById("saveContainer")
-    .style.display = "none";
+    .style.display =
+    "none";
+
 
 loadOverview();
 
 
-/*
-    Absichtlich keine Blur-Abfrage mehr:
+/* =========================================================
+   ENTER-TASTE BEI DER NAMENSEINGABE
+   ========================================================= */
 
-    checkPerson() lädt die vorhandenen Daten bereits
-    vollständig. Dadurch werden beim bloßen Verlassen
-    der Namensfelder keine unnötigen Serverabfragen
-    mehr ausgelöst.
-*/
+document
+    .getElementById("firstName")
+    .addEventListener(
+        "keydown",
+        event => {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                document
+                    .getElementById("lastName")
+                    .focus();
+
+            }
+
+        }
+    );
+
+
+document
+    .getElementById("lastName")
+    .addEventListener(
+        "keydown",
+        event => {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                checkPerson();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   ENTER BEIM ADMIN-PASSWORT
+   ========================================================= */
 
 document
     .getElementById("adminPassword")
@@ -1691,8 +2882,13 @@ document
         event => {
 
             if (event.key === "Enter") {
+
+                event.preventDefault();
+
                 loginAdmin();
+
             }
+
         }
     );
 
